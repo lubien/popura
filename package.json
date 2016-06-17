@@ -1,0 +1,38 @@
+{
+  "name": "node-anime-list",
+  "version": "0.1.0",
+  "description": "Scrapper for MyAnimeList site",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "xo src/* && ava test/**/*.test.js --require babel-register",
+    "docs": "jsdoc -c .jsdocrc -r",
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "myanimelist",
+    "mal",
+    "scrap"
+  ],
+  "author": "lubien <lubien1996@gmail.com> (http://lubien.me)",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "got": "^6.3.0",
+    "xml2js-es6-promise": "^1.0.3"
+  },
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "babel": "^6.5.2",
+    "babel-preset-es2015": "^6.9.0",
+    "docdash": "^0.4.0",
+    "dotenv": "^2.0.0",
+    "jsdoc": "^3.4.0",
+    "xo": "^0.16.0"
+  },
+  "xo": {
+    "rules": {
+      "comma-dangle": ["error", "always-multiline"]
+    }
+  }
+}
