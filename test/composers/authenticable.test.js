@@ -24,9 +24,5 @@ test('You can verify your auth', async t => {
 });
 
 test('Verifying an dummy user will throw', async t => {
-	try {
-		await mal('dummy', 'dummy').verifyCredentials();
-	} catch (err) {
-		t.pass();
-	}
+	t.throws(mal('dummy', 'dummy').verifyCredentials());
 });
