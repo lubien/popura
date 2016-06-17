@@ -1,4 +1,5 @@
 import generateAuthToken from '../utils/generate-auth-token';
+import {requestApi} from '../utils/request';
 
 const debug = require('debug')('node-anime-list:authenticable');
 
@@ -25,7 +26,7 @@ export default function authenticable(state) {
 			}
 
 			debug(`Verifying credentials for '${state.username}'`);
-			return this._requestApi('/account/verify_credentials.xml');
-		}
+			return requestApi(state.authToken, '/account/verify_credentials.xml');
+		},
 	};
 }

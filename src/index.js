@@ -1,6 +1,5 @@
 import authenticable from './composers/authenticable';
 import searchable from './composers/searchable';
-import requester from './composers/requester';
 
 const debug = require('debug')('node-anime-list:mal');
 
@@ -16,7 +15,6 @@ export default function mal(username = '', password = '') {
 	};
 
 	return Object.assign({},
-		requester(state),
 		authenticable(state),
 		searchable(state)
 	);

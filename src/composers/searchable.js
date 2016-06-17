@@ -1,11 +1,13 @@
-function searchable() {
+import {requestApi} from '../utils/request';
+
+function searchable(state) {
 	return {
 		searchAnimes(name) {
-			return this._requestApi(`/anime/search.xml`, {q: name});
+			return requestApi(state.authToken, `/anime/search.xml`, {q: name});
 		},
 
 		searchMangas(name) {
-			return this._requestApi(`/manga/search.xml`, {q: name});
+			return requestApi(state.authToken, `/manga/search.xml`, {q: name});
 		},
 	};
 }
