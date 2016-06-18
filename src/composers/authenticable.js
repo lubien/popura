@@ -44,11 +44,6 @@ export default function authenticable(state) {
 		 * or throws.
 		 */
 		verifyCredentials() {
-			if (!state.authToken) {
-				debug('Tried to verify a null user');
-				throw new Error(`Can't verify a null user`);
-			}
-
 			debug(`Verifying credentials for '${state.username}'`);
 			return requestApi(state.authToken, '/account/verify_credentials.xml');
 		},
