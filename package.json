@@ -13,6 +13,13 @@
     "mal",
     "scrap"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lubien/popura.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lubien/popura/issues"
+  },
   "author": "lubien <lubien1996@gmail.com> (http://lubien.me)",
   "license": "MIT",
   "dependencies": {
