@@ -32,7 +32,10 @@
   },
   "xo": {
     "rules": {
-      "comma-dangle": ["error", "always-multiline"],
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
       "no-warning-comments": 0
     }
   }
