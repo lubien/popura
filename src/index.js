@@ -3,7 +3,14 @@ import searchable from './composers/searchable';
 
 const debug = require('debug')('node-anime-list:mal');
 
-export default function mal(username = '', password = '') {
+/**
+ * Factory function that composes an instance of node-anime-list
+ *
+ * @param  {string} username = ''
+ * @param  {string} password = ''
+ * @return {object} - node-anime-list instance
+ */
+export default function malFactory(username = '', password = '') {
 	debug(
 		`New mal client user '${username}'. Use password = ${Boolean(password)}`
 	);
