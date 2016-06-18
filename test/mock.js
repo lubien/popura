@@ -1,15 +1,19 @@
 import path from 'path';
 import dotenv from 'dotenv';
 import popura from '../src';
+import generateAuthToken from '../src/utils/generate-auth-token';
 
 dotenv.config({
 	silent: false,
 	path: path.join(__dirname, '../.env'),
 });
 
-const instance = popura(
+export const instance = popura(
   process.env.MAL_USER,
   process.env.MAL_PASS
 );
 
-module.exports = instance;
+export const authToken = generateAuthToken(
+  process.env.MAL_USER,
+  process.env.MAL_PASS
+);

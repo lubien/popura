@@ -1,5 +1,5 @@
 import test from 'ava';
-import instance from '../instance';
+import {instance} from '../mock';
 
 test('Can search for animes', t => {
 	t.notThrows(instance.searchAnimes('Full Metal'));

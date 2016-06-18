@@ -1,6 +1,6 @@
 import test from 'ava';
 import popura from '../../src';
-import instance from '../instance';
+import {instance} from '../mock';
 import authenticable from '../../src/composers/authenticable';
 
 test('Authenticable displays your username from state', t => {
