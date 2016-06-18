@@ -1,9 +1,0 @@
-{
-    "source": {
-        "include": ["src"]
-    },
-    "opts": {
-      "template": "node_modules/docdash",
-      "destination": "./docs/"
-    }
-}
