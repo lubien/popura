@@ -11,14 +11,14 @@ const authToken = generateAuthToken(
 	process.env.MAL_PASS
 );
 
-test('Can request homepage', async t => {
+test('Can request homepage', t => {
 	t.notThrows(requestRaw(authToken, '/'));
 });
 
-test('Requesting a non-existant page throws', async t => {
+test('Requesting a non-existant page throws', t => {
 	t.throws(requestRaw(authToken, '/foo/bar/madoka'));
 });
 
-test('Requesting API should work if loggedin', async t => {
+test('Requesting API should work if loggedin', t => {
 	t.notThrows(requestApi(authToken, '/account/verify_credentials.xml'));
 });

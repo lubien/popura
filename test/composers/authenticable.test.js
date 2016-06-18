@@ -23,6 +23,6 @@ test('You can verify your auth', async t => {
 	t.is(credentials.username, instance.getUser());
 });
 
-test('Verifying an dummy user will throw', async t => {
+test('Verifying an dummy user will throw', t => {
 	t.throws(mal('dummy', 'dummy').verifyCredentials());
 });
