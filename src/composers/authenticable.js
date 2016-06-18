@@ -44,7 +44,7 @@ export default function authenticable(state) {
 		 * or throws.
 		 */
 		verifyCredentials() {
-			if (!state.username || !state.authToken) {
+			if (!state.authToken) {
 				debug('Tried to verify a null user');
 				throw new Error(`Can't verify a null user`);
 			}
