@@ -1,5 +1,5 @@
 import test from 'ava';
-import mal from '../../src';
+import popura from '../../src';
 import instance from '../instance';
 import authenticable from '../../src/composers/authenticable';
 
@@ -24,5 +24,5 @@ test('You can verify your auth', async t => {
 });
 
 test('Verifying an dummy user will throw', t => {
-	t.throws(mal('dummy', 'dummy').verifyCredentials());
+	t.throws(popura('dummy', 'dummy').verifyCredentials());
 });

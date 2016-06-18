@@ -1,16 +1,16 @@
 import authenticable from './composers/authenticable';
 import searchable from './composers/searchable';
 
-const debug = require('debug')('node-anime-list:mal');
+const debug = require('debug')('popura:mal');
 
 /**
- * Factory function that composes an instance of node-anime-list
+ * Factory function that composes an instance of popura
  *
  * @param  {string} username = ''
  * @param  {string} password = ''
- * @return {object} - node-anime-list instance
+ * @return {object} - popura instance
  */
-export default function malFactory(username = '', password = '') {
+export default function popuraFactory(username = '', password = '') {
 	debug(
 		`New mal client user '${username}'. Use password = ${Boolean(password)}`
 	);

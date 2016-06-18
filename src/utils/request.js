@@ -2,7 +2,7 @@ import got from 'got';
 import xml2js from 'xml2js-es6-promise';
 import cleanApiData from './clean-api-data';
 
-const debug = require('debug')('node-anime-list:request');
+const debug = require('debug')('popura:request');
 
 /**
  * Request a raw response.body from a MAL webpage

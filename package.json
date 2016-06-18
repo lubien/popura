@@ -1,5 +1,5 @@
 {
-  "name": "node-anime-list",
+  "name": "popura",
   "version": "0.1.0",
   "description": "Scrapper for MyAnimeList site",
   "main": "dist/index.js",

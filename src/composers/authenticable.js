@@ -1,7 +1,7 @@
 import generateAuthToken from '../utils/generate-auth-token';
 import {requestApi} from '../utils/request';
 
-const debug = require('debug')('node-anime-list:authenticable');
+const debug = require('debug')('popura:authenticable');
 
 /**
  * Composes an authenticable object
