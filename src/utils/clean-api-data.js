@@ -1,9 +1,7 @@
 import flattenObject from './flatten-object';
 
 /**
- * @module utils/cleanApiData
- * @description Cleans XML parsed JSON from MAL.
- * @requires utils/flattenObject
+ * Cleans XML parsed JSON from MAL.
  *
  * @example
  * cleanApiData({ anime: { entry: [ { key: ['value'] } ] } })

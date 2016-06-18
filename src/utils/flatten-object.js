@@ -1,6 +1,5 @@
 /**
- * @module utils/flattenObject
- * @description Flatten XML parsed objects containing one
+ * Flatten XML parsed objects containing one
  * element arrays as values
  *
  * @example
