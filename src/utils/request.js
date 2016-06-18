@@ -5,7 +5,7 @@ import cleanApiData from './clean-api-data';
 const debug = require('debug')('popura:request');
 
 /**
- * Request a raw response.body from a MAL webpage
+ * HTTP Request a page from MAL
  *
  * @param  {string} - Basic Authentication token
  * @param  {string} url = '/'
