@@ -1,6 +1,6 @@
 import {requestApi} from '../utils/request';
 
-function searchable(state) {
+export default function searchable(state) {
 	return {
 		searchAnimes(name) {
 			return requestApi(state.authToken, `/anime/search.xml`, {q: name});
@@ -11,5 +11,3 @@ function searchable(state) {
 		},
 	};
 }
-
-module.exports = searchable;
