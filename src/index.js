@@ -1,5 +1,6 @@
 import authenticable from './composers/authenticable';
 import searchable from './composers/searchable';
+import listable from './composers/listable';
 
 const debug = require('debug')('popura:factory');
 
@@ -23,6 +24,7 @@ export default function popuraFactory(username = '', password = '') {
 
 	return Object.assign({},
 		authenticable(state),
-		searchable(state)
+		searchable(state),
+		listable(state)
 	);
 }
