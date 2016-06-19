@@ -20,6 +20,7 @@ Popura is a promise-returning wrapper for MAL API and scrapper (W.I.P.) for feat
  * [Anime Model][anime-model]
  * [Manga Model][manga-model]
  * [Myinfo Model][myinfo-model]
+* [Development](#development)
 * [License](#license)
 
 ## Install
@@ -222,6 +223,12 @@ Returns `Promise` => Raw `response.body`.
 `user_days_spent_watching` => `float`
 
 Others => `int`
+
+## Development
+
+After clonning this repo, you must copy `.env.sample` to `.env` and put your MAL username and password.
+
+In some tests, it'll add, update and remove one anime and one manga from your lists. You can specify these two at `.env`. Defaults to anime Tachumaru Gekijou (id = 9562) and manga Junshin Miracle 100% (id = 94483), two not so known titles.
 
 ## License
 
