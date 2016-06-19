@@ -4,6 +4,7 @@
 
 [![Travis CI Build Status](https://travis-ci.org/lubien/popura.svg?branch=master)](https://travis-ci.org/lubien/popura)
 [![Coverage Status](https://coveralls.io/repos/github/lubien/popura/badge.svg?branch=master)](https://coveralls.io/github/lubien/popura?branch=master)
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
 Popura is a promise-returning wrapper for MAL API and scrapper (W.I.P.) for features you don't have in the API.
 
