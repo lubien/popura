@@ -33,13 +33,13 @@ export function requestRaw(authToken, url = '/', opts = {}) {
  * @return {Promise} - Resolves to a parsed as JSON and
  * cleaned version of MAL's API response
  */
-export function requestApi(authToken, url = '/', query = {}) {
+export function requestApi(authToken, url = '/', opts = {}) {
 	if (!authToken) {
 		debug('Not authenticated');
 		throw new Error('Must have username and password set to access the API');
 	}
 
-	return requestRaw(authToken, `/api${url}`, query)
+	return requestRaw(authToken, `/api${url}`, opts)
 		.then(res => xml2js(res.body))
 		.then(parsedXml => Promise.resolve(cleanApiData(parsedXml)));
 }
