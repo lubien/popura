@@ -15,7 +15,9 @@ export default function searchable(state) {
 		 * @return {Promise} - Resolves to a list of matched titles or empty
 		 */
 		searchAnimes(name) {
-			return requestApi(state.authToken, `/anime/search.xml`, {q: name});
+			return requestApi(state.authToken, `/anime/search.xml`, {
+				query: {q: name},
+			});
 		},
 
 		/**
@@ -25,7 +27,9 @@ export default function searchable(state) {
 		 * @return {Promise} - Resolves to a list of matched titles or empty
 		 */
 		searchMangas(name) {
-			return requestApi(state.authToken, `/manga/search.xml`, {q: name});
+			return requestApi(state.authToken, `/manga/search.xml`, {
+				query: {q: name},
+			});
 		},
 	};
 }

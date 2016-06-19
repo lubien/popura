@@ -12,15 +12,14 @@ const debug = require('debug')('popura:request');
  * @param  {object} query = {}
  * @return {Promise} - Resolves to the raw request body
  */
-export function requestRaw(authToken, url = '/', query = {}) {
-	debug('Requesting %s with query', url, query);
+export function requestRaw(authToken, url = '/', opts = {}) {
+	debug('Requesting %s with query', url, opts.query);
 	debug('Using auth:', `Basic ${authToken}`);
-	return got(`http://myanimelist.net${url}`, {
-		query,
+	return got(`http://myanimelist.net${url}`, Object.assign(opts, {
 		headers: {
 			Authorization: `Basic ${authToken}`,
 		},
-	});
+	}));
 }
 
 // TODO: function requestHtml()
