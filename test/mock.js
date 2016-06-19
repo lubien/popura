@@ -4,7 +4,7 @@ import popura from '../src';
 import generateAuthToken from '../src/utils/generate-auth-token';
 
 dotenv.config({
-	silent: false,
+	silent: true,
 	path: path.join(__dirname, '../.env'),
 });
 
