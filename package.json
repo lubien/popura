@@ -2,10 +2,10 @@
   "name": "popura",
   "version": "0.1.0",
   "description": "Scrapper for MyAnimeList site",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "xo src/* && ava test/**/*.test.js --require babel-register",
-    "build": "babel src --out-dir dist",
+    "build": "babel src --out-dir lib",
     "prepublish": "npm run build"
   },
   "keywords": [
