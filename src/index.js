@@ -1,7 +1,7 @@
 import authenticable from './composers/authenticable';
 import searchable from './composers/searchable';
 
-const debug = require('debug')('popura:mal');
+const debug = require('debug')('popura:factory');
 
 /**
  * Factory function that composes an instance of popura

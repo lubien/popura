@@ -14,8 +14,10 @@ const debug = require('debug')('popura:request');
  * @return {Promise} - Resolves to the raw request body
  */
 export function requestRaw(authToken, url = '/', opts = {}) {
-	debug('Requesting %s with query', url, opts.query);
-	debug('Using auth:', `Basic ${authToken}`);
+	debug(
+		`Requesting ${url} with. Use auth: ${Boolean(authToken)}. Query`,
+		opts.query
+	);
 	return got(`http://myanimelist.net${url}`, Object.assign(opts, {
 		headers: {
 			Authorization: `Basic ${authToken}`,
@@ -55,6 +57,7 @@ export function requestApi(authToken, url = '/', opts = {}) {
  * where myinfo constains info about the user and the list.
  */
 export function requestList(authToken, type, username) {
+	debug(`Requesting ${type}list of ${username}`);
 	return requestRaw(authToken, '/malappinfo.php', {
 		query: {
 			u: username,
@@ -80,6 +83,7 @@ export function requestList(authToken, type, username) {
  * @return {Promise} - Resolves to the raw request.body
  */
 export function postXml(authToken, url = '/', opts = {}) {
+	debug(`Posting in MAL's API`);
 	return got(`http://myanimelist.net/api${url}`, Object.assign(opts, {
 		method: 'POST',
 		headers: {

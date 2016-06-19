@@ -1,5 +1,7 @@
 import {requestApi} from '../utils/request';
 
+const debug = require('debug')('popura:searchable');
+
 /**
  * Composes searchable mixin
  *
@@ -15,6 +17,7 @@ export default function searchable(state) {
 		 * @return {Promise} - Resolves to a list of matched titles or empty
 		 */
 		searchAnimes(name) {
+			debug(`Searching for the anime '${name}'`);
 			return requestApi(state.authToken, `/anime/search.xml`, {
 				query: {q: name},
 			});
@@ -27,6 +30,7 @@ export default function searchable(state) {
 		 * @return {Promise} - Resolves to a list of matched titles or empty
 		 */
 		searchMangas(name) {
+			debug(`Searching for the manga '${name}'`);
 			return requestApi(state.authToken, `/manga/search.xml`, {
 				query: {q: name},
 			});
