@@ -1,6 +1,4 @@
 /**
- * Generates an {@link authToken}
- *
  * @param  {string} username - MAL username
  * @param  {string} password - MAL password
  * @return {string} - Basic Authentication token
