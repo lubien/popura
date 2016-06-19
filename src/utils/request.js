@@ -4,6 +4,9 @@ import cleanApiData from './clean-api-data';
 import cleanListData from './clean-list-data';
 
 const debug = require('debug')('popura:request');
+const pkg = require('../../package.json');
+
+const userAgent = `popura/${pkg.version} (https://github.com/lubien/popura)`;
 
 /**
  * HTTP Request a page from MAL
@@ -21,6 +24,7 @@ export function requestRaw(authToken, url = '/', opts = {}) {
 	return got(`http://myanimelist.net${url}`, Object.assign(opts, {
 		headers: {
 			Authorization: `Basic ${authToken}`,
+			'User-Agent': userAgent,
 		},
 	}));
 }
@@ -88,6 +92,7 @@ export function postXml(authToken, url = '/', opts = {}) {
 		method: 'POST',
 		headers: {
 			Authorization: `Basic ${authToken}`,
+			'User-Agent': userAgent,
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
 	}))
