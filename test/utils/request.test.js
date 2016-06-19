@@ -1,5 +1,5 @@
 import test from 'ava';
-import {requestRaw, requestApi} from '../../src/utils/request';
+import {requestRaw, requestApi, requestList} from '../../src/utils/request';
 import {authToken} from '../mock';
 
 test('Can request homepage', t => {
@@ -12,4 +12,9 @@ test('Requesting a non-existant page throws', t => {
 
 test('Requesting API should work if loggedin', t => {
 	t.notThrows(requestApi(authToken, '/account/verify_credentials.xml'));
+});
+
+test(`Can request an user's anime and manga lists`, t => {
+	t.notThrows(requestList(authToken, 'anime', 'lubien'));
+	t.notThrows(requestList(authToken, 'anime', 'lubien'));
 });

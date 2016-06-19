@@ -1,6 +1,7 @@
 import got from 'got';
 import xml2js from 'xml2js-es6-promise';
 import cleanApiData from './clean-api-data';
+import cleanListData from './clean-list-data';
 
 const debug = require('debug')('popura:request');
 
@@ -42,4 +43,49 @@ export function requestApi(authToken, url = '/', opts = {}) {
 	return requestRaw(authToken, `/api${url}`, opts)
 		.then(res => xml2js(res.body))
 		.then(parsedXml => Promise.resolve(cleanApiData(parsedXml)));
+}
+
+/**
+ * Request an user anime/manga list
+ *
+ * @param  {string} authToken - Basic Authentication token
+ * @param  {string} type - List type: 'anime' or 'manga'
+ * @param  {string} username - MAL username
+ * @return {Promise} - Resolves to {myinfo: {...}, list: [...]}
+ * where myinfo constains info about the user and the list.
+ */
+export function requestList(authToken, type, username) {
+	return requestRaw(authToken, '/malappinfo.php', {
+		query: {
+			u: username,
+			type,
+		},
+	})
+		.then(res => xml2js(res.body))
+		.then(parsedXml => {
+			if (parsedXml.myanimelist.error) {
+				throw new Error(parsedXml.myanimelist.error);
+			}
+			return Promise.resolve(parsedXml);
+		})
+		.then(parsedXml => Promise.resolve(cleanListData(parsedXml)));
+}
+
+/**
+ * Sends XML to the MAL API
+ *
+ * @param  {string} - Basic Authentication token
+ * @param  {string} url = '/'
+ * @param  {object} opts = {} - Request options
+ * @return {Promise} - Resolves to the raw request.body
+ */
+export function postXml(authToken, url = '/', opts = {}) {
+	return got(`http://myanimelist.net/api${url}`, Object.assign(opts, {
+		method: 'POST',
+		headers: {
+			Authorization: `Basic ${authToken}`,
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	}))
+		.then(({body}) => Promise.resolve(body));
 }
