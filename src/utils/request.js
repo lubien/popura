@@ -9,7 +9,7 @@ const debug = require('debug')('popura:request');
  *
  * @param  {string} - Basic Authentication token
  * @param  {string} url = '/'
- * @param  {object} query = {}
+ * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to the raw request body
  */
 export function requestRaw(authToken, url = '/', opts = {}) {
@@ -29,7 +29,7 @@ export function requestRaw(authToken, url = '/', opts = {}) {
  *
  * @param  {string} - Basic Authentication token
  * @param  {string} url = '/'
- * @param  {object} query = {}
+ * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to a parsed as JSON and
  * cleaned version of MAL's API response
  */
