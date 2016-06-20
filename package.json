@@ -7,7 +7,9 @@
     "test": "xo src/* && ava test/**/*.test.js --require babel-register",
     "test-coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "build": "babel src --out-dir lib",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "preversion": "npm run prepublish",
+    "postversion": "git push && git push --tags"
   },
   "keywords": [
     "myanimelist",
