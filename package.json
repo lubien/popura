@@ -8,7 +8,6 @@
     "test-coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "build": "babel src --out-dir lib",
     "prepublish": "npm run build",
-    "preversion": "npm run prepublish",
     "postversion": "git push && git push --tags"
   },
   "keywords": [
