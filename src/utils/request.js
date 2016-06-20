@@ -86,8 +86,18 @@ export function requestList(authToken, type, username) {
  * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to the raw request.body
  */
-export function postXml(authToken, url = '/', opts = {}) {
-	debug(`Posting in MAL's API`);
+export function postXml(authToken, url = '/', opts = {}, expects = false) {
+	debug(`Posting in MAL's API at ${url}`);
+
+	let checkerFunction;
+	if (expects) {
+		if (typeof expects === 'string') {
+			checkerFunction = body => body.includes(expects);
+		} else {
+			checkerFunction = expects;
+		}
+	}
+
 	return got(`http://myanimelist.net/api${url}`, Object.assign(opts, {
 		method: 'POST',
 		headers: {
@@ -96,5 +106,12 @@ export function postXml(authToken, url = '/', opts = {}) {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
 	}))
-		.then(({body}) => Promise.resolve(body));
+		.then(res => {
+			const body = res.body || '';
+			if (expects && !checkerFunction(body)) {
+				debug(`Post was expecting ${expects} instead got`, body);
+				throw new Error(`Unespected return from MAL server posting at ${url}`);
+			}
+			Promise.resolve(body);
+		});
 }

@@ -7,6 +7,14 @@ import {
 const debug = require('debug')('popura:listable');
 
 /**
+ * Let me explain this shit. Sometimes, MAL returns '201 Created'.
+ * Sometimes it returns a transation ID.
+ */
+const checkAddResponse = body => (
+	body && (Number(body) > 0 || body.includes('201 Created'))
+);
+
+/**
  * Composes an object that abstracts MAL's lists API
  *
  * @param  {object} state
@@ -44,7 +52,7 @@ export default function listable(state) {
 
 			return postXml(state.authToken, `/animelist/add/${id}.xml`, {
 				body: {data: outputAnimeValues(values)},
-			});
+			}, checkAddResponse);
 		},
 
 		/**
@@ -59,7 +67,7 @@ export default function listable(state) {
 
 			return postXml(state.authToken, `/mangalist/add/${id}.xml`, {
 				body: {data: outputMangaValues(values)},
-			});
+			}, checkAddResponse);
 		},
 
 		/**
@@ -70,7 +78,7 @@ export default function listable(state) {
 		updateAnime(id, values = {}) {
 			return postXml(state.authToken, `/animelist/update/${id}.xml`, {
 				body: {data: outputAnimeValues(values)},
-			});
+			}, 'Updated');
 		},
 
 		/**
@@ -81,7 +89,7 @@ export default function listable(state) {
 		updateManga(id, values = {}) {
 			return postXml(state.authToken, `/mangalist/update/${id}.xml`, {
 				body: {data: outputMangaValues(values)},
-			});
+			}, 'Updated');
 		},
 
 		/**
@@ -89,7 +97,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		deleteAnime(id) {
-			return postXml(state.authToken, `/animelist/delete/${id}.xml`);
+			return postXml(state.authToken, `/animelist/delete/${id}.xml`, {}, 'Deleted');
 		},
 
 		/**
@@ -97,7 +105,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		deleteManga(id) {
-			return postXml(state.authToken, `/mangalist/delete/${id}.xml`);
+			return postXml(state.authToken, `/mangalist/delete/${id}.xml`, {}, 'Deleted');
 		},
 	};
 }
