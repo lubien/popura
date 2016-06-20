@@ -72,7 +72,7 @@ Returns `Promise` => Array of [Anime Models][anime-model] | [Manga Models][manga
 
 Get the animelist or mangalist from an user. If `username` is empty, returns current user's list.
 
-Returns `Promise` => `{myinfo, list}` where `myinfo` is a [Myinfo Model][myinfo-model] and `list` is an array of [Anime Models][anime-model] | [Manga Models][manga-model].
+Returns `Promise` => `{myinfo, list}` where `myinfo` is a [Myinfo Model][myinfo-model] and `list` is an array of animes | mangas.
 
 #### `.addAnime(id, values = {})` and `.addManga(id, values = {})`
 
