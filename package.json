@@ -1,7 +1,7 @@
 {
   "name": "popura",
   "version": "0.1.1",
-  "description": "Scrapper for MyAnimeList site",
+  "description": "Promise-returning wrapper for MyAnimeList API",
   "main": "lib/index.js",
   "scripts": {
     "test": "xo src/* && ava test/**/*.test.js --require babel-register",
