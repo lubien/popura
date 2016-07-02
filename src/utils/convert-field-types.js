@@ -12,6 +12,8 @@ const dateFields = [
 ];
 const arrayFields = ['tags', 'my_tags'];
 
+const showTwoDigit = n => n < 10 ? `0${n}` : n;
+
 /**
  * Convert MAL's API fields to proper types
  *
@@ -31,11 +33,13 @@ export default function convertFieldTypes(obj) {
 		} else if (dateFields.indexOf(key) !== -1) {
 			// Sometimes it use timesptamp! Fuck U MAL API
 			if (key === 'my_last_updated') {
-				result[key] = new Date(Number(obj[key]) * 1000);
+				const date = new Date(Number(obj[key] * 1000));
+				result[key] =
+					`${date.getUTCFullYear()}-${showTwoDigit(date.getUTCMonth())}-${showTwoDigit(date.getUTCDate())}`;
 			} else if (obj[key] === '0000-00-00') {
 				result[key] = false;
 			} else {
-				result[key] = new Date(obj[key]);
+				result[key] = obj[key];
 			}
 		} else if (arrayFields.indexOf(key) !== -1) {
 			result[key] = obj[key] ? obj[key].split(',').map(value => value.trim()) : [];
