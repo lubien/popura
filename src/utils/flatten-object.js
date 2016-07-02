@@ -16,7 +16,11 @@ export default function flattenObject(obj) {
 	const newObj = {};
 
 	for (const key of Object.keys(obj)) {
-		newObj[key] = obj[key][0];
+		if (Array.isArray(obj[key])) {
+			newObj[key] = obj[key][0];
+		} else {
+			newObj[key] = obj[key];
+		}
 	}
 
 	return newObj;
