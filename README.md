@@ -1,12 +1,12 @@
 #popura
 
-> MyAnimeList client for API and scrapping
+> NodeJS wrapper for MyAnimeList API
 
 [![Travis CI Build Status](https://travis-ci.org/lubien/popura.svg?branch=master)](https://travis-ci.org/lubien/popura)
 [![Coverage Status](https://coveralls.io/repos/github/lubien/popura/badge.svg?branch=master)](https://coveralls.io/github/lubien/popura?branch=master)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-Popura is a promise-returning wrapper for MAL API and scrapper (W.I.P.) for features you don't have in the API.
+Popura is a promise-returning wrapper for MAL API.
 
 ## Table of Contents
 
@@ -36,8 +36,8 @@ import popura from 'popura';
 const client = popura('YourAwesomeUsername', 'YourHackablePassword');
 
 client.getAnimeList()
-  .then(res => console.log(data))
-  .then(err => console.log(err));
+  .then(res => console.log(res))
+  .catch(err => console.log(err));
 ```
 
 ## API
