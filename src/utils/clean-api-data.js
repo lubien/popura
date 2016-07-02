@@ -24,8 +24,7 @@ export default function cleanApiData(data) {
 	let newData = data.anime || data.manga || data.user || data;
 
 	if (Array.isArray(newData.entry)) {
-		newData.entry.map(flattenObject);
-		newData = newData.entry;
+		newData = newData.entry.map(flattenObject);
 	} else if (typeof newData === 'object') {
 		newData = flattenObject(newData);
 	}
