@@ -10,9 +10,11 @@ const numericFields = [
 const dateFields = [
 	'start_date', 'end_date', 'series_start', 'series_end', 'my_last_updated', 'my_start_date', 'my_finish_date',
 ];
-const arrayFields = ['tags', 'my_tags'];
+const commaSeparatedArrayFields = ['tags', 'my_tags'];
+const semicolonSeparatedArrayFields = ['synonyms', 'series_synonyms'];
 
 const showTwoDigit = n => n < 10 ? `0${n}` : n;
+const splitBy = (splitter, str) => str.split(splitter).map(value => value.trim());
 
 /**
  * Convert MAL's API fields to proper types
@@ -41,8 +43,10 @@ export default function convertFieldTypes(obj) {
 			} else {
 				result[key] = obj[key];
 			}
-		} else if (arrayFields.indexOf(key) !== -1) {
-			result[key] = obj[key] ? obj[key].split(',').map(value => value.trim()) : [];
+		} else if (commaSeparatedArrayFields.indexOf(key) !== -1) {
+			result[key] = obj[key] ? splitBy(',', obj[key]) : [];
+		} else if (semicolonSeparatedArrayFields.indexOf(key) !== -1) {
+			result[key] = obj[key] ? splitBy(';', obj[key]) : [];
 		} else {
 			result[key] = obj[key];
 		}
