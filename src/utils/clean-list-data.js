@@ -1,4 +1,5 @@
 import flattenObject from './flatten-object';
+import convertFieldTypes from './convert-field-types';
 
 /**
  * Clean data requested from anime/manga lists
@@ -17,7 +18,7 @@ export default function cleanListData({myanimelist: {myinfo, anime, manga}}) {
 	}
 
 	const newData = {
-		myinfo: flattenObject(myinfo[0]),
+		myinfo: convertFieldTypes(flattenObject(myinfo[0])),
 		list: [],
 	};
 
@@ -36,7 +37,7 @@ export default function cleanListData({myanimelist: {myinfo, anime, manga}}) {
 
 	if (type) {
 		type.forEach(item => {
-			newData.list.push(flattenObject(item));
+			newData.list.push(convertFieldTypes(flattenObject(item)));
 		});
 	}
 

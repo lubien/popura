@@ -1,4 +1,5 @@
 import flattenObject from './flatten-object';
+import convertFieldTypes from './convert-field-types';
 
 /**
  * Cleans XML parsed JSON from MAL.
@@ -24,9 +25,9 @@ export default function cleanApiData(data) {
 	let newData = data.anime || data.manga || data.user || data;
 
 	if (Array.isArray(newData.entry)) {
-		newData = newData.entry.map(flattenObject);
+		newData = newData.entry.map(flattenObject).map(convertFieldTypes);
 	} else if (typeof newData === 'object') {
-		newData = flattenObject(newData);
+		newData = convertFieldTypes(flattenObject(newData));
 	}
 
 	return newData;
