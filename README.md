@@ -6,6 +6,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/lubien/popura/badge.svg?branch=master)](https://coveralls.io/github/lubien/popura?branch=master)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
+<p align="center"><img src="http://i.imgur.com/afidy6U.gif" alt="Popura"/></p>
+
+What is [Popura](http://myanimelist.net/character/24417/Popura_Taneshima)?
 Popura is a promise-returning wrapper for MAL API.
 
 ## Table of Contents
