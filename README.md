@@ -8,8 +8,7 @@
 
 <p align="center"><img src="http://i.imgur.com/afidy6U.gif" alt="Popura"/></p>
 
-What is [Popura](http://myanimelist.net/character/24417/Popura_Taneshima)?
-Popura is a promise-returning wrapper for MAL API.
+[Popura](http://myanimelist.net/character/24417/Popura_Taneshima) is a promise-returning wrapper for MAL API.
 
 ## Table of Contents
 
