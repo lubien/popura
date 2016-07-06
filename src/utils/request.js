@@ -29,7 +29,6 @@ export function requestRaw(authToken, url = '/', opts = {}) {
 	}));
 }
 
-// TODO: function requestHtml()
 
 /**
  * Request MAL's API XML, then parses as JSON and clean it
