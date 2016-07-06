@@ -1,4 +1,4 @@
-import convertFieldTypes from './convert-field-types';
+import {convertFieldTypes} from './';
 
 /**
  * Cleans XML parsed JSON from MAL.

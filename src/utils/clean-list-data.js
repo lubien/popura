@@ -1,4 +1,4 @@
-import convertFieldTypes from './convert-field-types';
+import {convertFieldTypes} from './';
 
 /**
  * Clean data requested from anime/manga lists

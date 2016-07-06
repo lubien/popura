@@ -1,7 +1,9 @@
 import got from 'got';
-import xmlParser from './xml-parser';
-import cleanApiData from './clean-api-data';
-import cleanListData from './clean-list-data';
+import {
+	xmlParser,
+	cleanApiData,
+	cleanListData,
+} from './';
 
 const debug = require('debug')('popura:request');
 const pkg = require('../../package.json');

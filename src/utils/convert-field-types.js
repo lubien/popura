@@ -1,11 +1,7 @@
+import {splitBy, showTwoDigit} from './';
+
 const commaSeparatedArrayFields = ['tags', 'my_tags'];
 const semicolonSeparatedArrayFields = ['synonyms', 'series_synonyms'];
-
-const showTwoDigit = n => n < 10 ? `0${n}` : n;
-const splitBy = (splitter, str) =>
-	str ?
-		str.split(splitter).map(value => value.trim()) :
-		[];
 
 /**
  * Convert MAL's API fields to proper types
