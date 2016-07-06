@@ -1,5 +1,5 @@
 import got from 'got';
-import xml2js from 'xml2js-es6-promise';
+import xmlParser from './xml-parser';
 import cleanApiData from './clean-api-data';
 import cleanListData from './clean-list-data';
 
@@ -46,7 +46,7 @@ export function requestApi(authToken, url = '/', opts = {}) {
 	}
 
 	return requestRaw(authToken, `/api${url}`, opts)
-		.then(res => xml2js(res.body))
+		.then(res => xmlParser(res.body))
 		.then(parsedXml => Promise.resolve(cleanApiData(parsedXml)));
 }
 
@@ -67,10 +67,10 @@ export function requestList(authToken, type, username) {
 			type,
 		},
 	})
-		.then(res => xml2js(res.body))
+		.then(res => xmlParser(res.body))
 		.then(parsedXml => {
-			if (parsedXml.myanimelist.error) {
-				throw new Error(parsedXml.myanimelist.error);
+			if (parsedXml.error) {
+				throw new Error(parsedXml.error);
 			}
 			return Promise.resolve(parsedXml);
 		})
