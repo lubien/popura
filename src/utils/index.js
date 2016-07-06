@@ -23,7 +23,7 @@ export const checkAddResponse = body => (
 );
 
 /**
- * Given a number, return a itself with at least 2 digits.
+ * Given a number, return itself with at least 2 digits.
  *
  * @param {number} n
  * @return {string}
@@ -31,7 +31,7 @@ export const checkAddResponse = body => (
 export const showTwoDigit = n => n < 10 ? `0${n}` : n;
 
 /**
- * Given an `splitter` charater, split a `str` an trim it's values.
+ * Given a `splitter` character, split a `str` and trim it's values.
  *
  * @param {string} splitter
  * @param {string} str
