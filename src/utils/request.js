@@ -31,7 +31,6 @@ export function requestRaw(authToken, url = '/', opts = {}) {
 	}));
 }
 
-
 /**
  * Request MAL's API XML, then parses as JSON and clean it
  *
