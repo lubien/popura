@@ -14,7 +14,7 @@ const userAgent = `popura/${version} (https://github.com/lubien/popura)`;
 /**
  * HTTP Request a page from MAL
  *
- * @param  {string} - Basic Authentication token
+ * @param  {string} authToken - Basic Authentication token
  * @param  {string} url = '/'
  * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to the raw request body
@@ -36,7 +36,7 @@ export function request(authToken, url = '/', opts = {}) {
 /**
  * Request MAL's API XML, then parses as JSON and clean it
  *
- * @param  {string} - Basic Authentication token
+ * @param  {string} authToken - Basic Authentication token
  * @param  {string} url = '/'
  * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to a parsed as JSON and
@@ -83,7 +83,7 @@ export function list(authToken, type, username) {
 /**
  * Sends XML to the MAL API
  *
- * @param  {string} - Basic Authentication token
+ * @param  {string} authToken - Basic Authentication token
  * @param  {string} url = '/'
  * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to the raw request.body
