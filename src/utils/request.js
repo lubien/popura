@@ -1,6 +1,7 @@
 import got from 'got';
 import {
 	xmlParser,
+	xmlBuilder,
 	cleanApiData,
 	cleanListData,
 } from './';
@@ -86,7 +87,7 @@ export function requestList(authToken, type, username) {
  * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to the raw request.body
  */
-export function postXml(authToken, url = '/', opts = {}, expects = false) {
+export function postXml(authToken, url = '/', values = false, expects = false) {
 	debug(`Posting in MAL's API at ${url}`);
 
 	let checkerFunction;
@@ -98,14 +99,15 @@ export function postXml(authToken, url = '/', opts = {}, expects = false) {
 		}
 	}
 
-	return got(`http://myanimelist.net/api${url}`, Object.assign(opts, {
+	return got(`http://myanimelist.net/api${url}`, {
 		method: 'POST',
 		headers: {
 			Authorization: `Basic ${authToken}`,
 			'User-Agent': userAgent,
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
-	}))
+		body: values ? {data: xmlBuilder(values)} : false,
+	})
 		.then(res => {
 			const body = res.body || '';
 			if (expects && !checkerFunction(body)) {

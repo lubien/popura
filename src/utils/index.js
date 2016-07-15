@@ -3,14 +3,15 @@ import cleanListData from './clean-list-data';
 import convertFieldTypes from './convert-field-types';
 import generateAuthToken from './generate-auth-token';
 import xmlParser from './xml-parser';
+import xmlBuilder from './xml-builder';
 
 export {cleanApiData};
 export {cleanListData};
 export {convertFieldTypes};
 export {generateAuthToken};
-export * from './output-api-values';
 export * from './request';
 export {xmlParser};
+export {xmlBuilder};
 
 /**
  * Check if a POST into MAL API succeeded

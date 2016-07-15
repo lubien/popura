@@ -1,8 +1,4 @@
 import {requestList, postXml} from '../utils/request';
-import {
-	outputAnimeValues,
-	outputMangaValues,
-} from '../utils/output-api-values';
 
 const debug = require('debug')('popura:listable');
 
@@ -50,9 +46,7 @@ export default function listable(state) {
 				values.status = 1;
 			}
 
-			return postXml(state.authToken, `/animelist/add/${id}.xml`, {
-				body: {data: outputAnimeValues(values)},
-			}, checkAddResponse);
+			return postXml(state.authToken, `/animelist/add/${id}.xml`, values, checkAddResponse);
 		},
 
 		/**
@@ -65,9 +59,7 @@ export default function listable(state) {
 				values.status = 1;
 			}
 
-			return postXml(state.authToken, `/mangalist/add/${id}.xml`, {
-				body: {data: outputMangaValues(values)},
-			}, checkAddResponse);
+			return postXml(state.authToken, `/mangalist/add/${id}.xml`, values, checkAddResponse);
 		},
 
 		/**
@@ -76,9 +68,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		updateAnime(id, values = {}) {
-			return postXml(state.authToken, `/animelist/update/${id}.xml`, {
-				body: {data: outputAnimeValues(values)},
-			}, 'Updated');
+			return postXml(state.authToken, `/animelist/update/${id}.xml`, values, 'Updated');
 		},
 
 		/**
@@ -87,9 +77,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		updateManga(id, values = {}) {
-			return postXml(state.authToken, `/mangalist/update/${id}.xml`, {
-				body: {data: outputMangaValues(values)},
-			}, 'Updated');
+			return postXml(state.authToken, `/mangalist/update/${id}.xml`, values, 'Updated');
 		},
 
 		/**
@@ -97,7 +85,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		deleteAnime(id) {
-			return postXml(state.authToken, `/animelist/delete/${id}.xml`, {}, 'Deleted');
+			return postXml(state.authToken, `/animelist/delete/${id}.xml`, false, 'Deleted');
 		},
 
 		/**
@@ -105,7 +93,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		deleteManga(id) {
-			return postXml(state.authToken, `/mangalist/delete/${id}.xml`, {}, 'Deleted');
+			return postXml(state.authToken, `/mangalist/delete/${id}.xml`, false, 'Deleted');
 		},
 	};
 }
