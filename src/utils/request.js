@@ -19,7 +19,7 @@ const userAgent = `popura/${version} (https://github.com/lubien/popura)`;
  * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to the raw request body
  */
-export function requestRaw(authToken, url = '/', opts = {}) {
+export function request(authToken, url = '/', opts = {}) {
 	debug(
 		`Requesting ${url} with. Use auth: ${Boolean(authToken)}. Query`,
 		opts.query
@@ -47,7 +47,7 @@ export function get(authToken, url = '/', opts = {}) {
 		throw new Error('Must have username and password set to access the API');
 	}
 
-	return requestRaw(authToken, `/api${url}`, opts)
+	return request(authToken, `/api${url}`, opts)
 		.then(({body}) => xmlParser(body))
 		.then(cleanApiData);
 }
@@ -63,7 +63,7 @@ export function get(authToken, url = '/', opts = {}) {
  */
 export function list(authToken, type, username) {
 	debug(`Requesting ${type}list of ${username}`);
-	return requestRaw(authToken, '/malappinfo.php', {
+	return request(authToken, '/malappinfo.php', {
 		query: {
 			u: username,
 			type,
