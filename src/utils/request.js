@@ -7,9 +7,9 @@ import {
 } from './';
 
 const debug = require('debug')('popura:request');
-const pkg = require('../../package.json');
+const {version} = require('../../package.json');
 
-const userAgent = `popura/${pkg.version} (https://github.com/lubien/popura)`;
+const userAgent = `popura/${version} (https://github.com/lubien/popura)`;
 
 /**
  * HTTP Request a page from MAL
@@ -48,8 +48,8 @@ export function get(authToken, url = '/', opts = {}) {
 	}
 
 	return requestRaw(authToken, `/api${url}`, opts)
-		.then(res => xmlParser(res.body))
-		.then(parsedXml => Promise.resolve(cleanApiData(parsedXml)));
+		.then(({body}) => xmlParser(body))
+		.then(cleanApiData);
 }
 
 /**
@@ -69,14 +69,14 @@ export function requestList(authToken, type, username) {
 			type,
 		},
 	})
-		.then(res => xmlParser(res.body))
-		.then(parsedXml => {
-			if (parsedXml.error) {
-				throw new Error(parsedXml.error);
+		.then(({body}) => xmlParser(body))
+		.then(parsed => {
+			if (parsed.error) {
+				throw new Error(parsed.error);
 			}
-			return Promise.resolve(parsedXml);
+			return parsed;
 		})
-		.then(parsedXml => Promise.resolve(cleanListData(parsedXml)));
+		.then(cleanListData);
 }
 
 /**
@@ -99,12 +99,11 @@ export function post(authToken, url = '/', {values = false, expects = false}) {
 		},
 		body: values ? {data: xmlBuilder(values)} : false,
 	})
-		.then(res => {
-			const body = res.body || '';
+		.then(({body = ''}) => {
 			if (expects && !expects(body)) {
 				debug(`Body did not match test function`, body);
 				throw new Error(`Unespected return from MAL server posting at ${url}`);
 			}
-			Promise.resolve(body);
+			return body;
 		});
 }
