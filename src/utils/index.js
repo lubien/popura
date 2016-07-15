@@ -21,9 +21,8 @@ export {xmlBuilder};
  * @param {string} body
  * @return {bool}
  */
-export const checkAddResponse = body => (
-	body && (Number(body) > 0 || body.includes('201 Created'))
-);
+export const checkAddResponse = body =>
+	body && (Number(body) > 0 || body.includes('201 Created'));
 
 /**
  * Given a string, returns a function that checks if it's
@@ -32,7 +31,8 @@ export const checkAddResponse = body => (
  * @param {string} needle
  * @return {function}
  */
-export const includesText = needle => haystack => haystack.includes(needle);
+export const includesText = needle =>
+	haystack => haystack.includes(needle);
 
 /**
  * Given a number, return itself with at least 2 digits.
@@ -40,7 +40,8 @@ export const includesText = needle => haystack => haystack.includes(needle);
  * @param {number} n
  * @return {string}
  */
-export const showTwoDigit = n => n < 10 ? `0${n}` : n;
+export const showTwoDigit = n =>
+	n < 10 ? `0${n}` : n;
 
 /**
  * Given a `splitter` character, split a `str` and trim it's values.
@@ -50,7 +51,5 @@ export const showTwoDigit = n => n < 10 ? `0${n}` : n;
  * @return {array}
  */
 export const splitBy = (splitter, str) =>
-	str ?
-		str.split(splitter).map(value => value.trim()) :
-		[];
+	str ? str.split(splitter).map(value => value.trim()) : [];
 
