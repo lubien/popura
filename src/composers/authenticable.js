@@ -1,5 +1,5 @@
 import generateAuthToken from '../utils/generate-auth-token';
-import {requestApi} from '../utils/request';
+import {get} from '../utils/request';
 
 const debug = require('debug')('popura:authenticable');
 
@@ -45,7 +45,7 @@ export default function authenticable(state) {
 		 */
 		verifyCredentials() {
 			debug(`Verifying credentials for '${state.username}'`);
-			return requestApi(state.authToken, '/account/verify_credentials.xml');
+			return get(state.authToken, '/account/verify_credentials.xml');
 		},
 	};
 }

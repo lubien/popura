@@ -1,4 +1,4 @@
-import {requestApi} from '../utils/request';
+import {get} from '../utils/request';
 
 const debug = require('debug')('popura:searchable');
 
@@ -18,7 +18,7 @@ export default function searchable(state) {
 		 */
 		searchAnimes(name) {
 			debug(`Searching for the anime '${name}'`);
-			return requestApi(state.authToken, `/anime/search.xml`, {
+			return get(state.authToken, `/anime/search.xml`, {
 				query: {q: name},
 			});
 		},
@@ -31,7 +31,7 @@ export default function searchable(state) {
 		 */
 		searchMangas(name) {
 			debug(`Searching for the manga '${name}'`);
-			return requestApi(state.authToken, `/manga/search.xml`, {
+			return get(state.authToken, `/manga/search.xml`, {
 				query: {q: name},
 			});
 		},
