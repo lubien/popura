@@ -61,7 +61,7 @@ export function get(authToken, url = '/', opts = {}) {
  * @return {Promise} - Resolves to {myinfo: {...}, list: [...]}
  * where myinfo constains info about the user and the list.
  */
-export function requestList(authToken, type, username) {
+export function list(authToken, type, username) {
 	debug(`Requesting ${type}list of ${username}`);
 	return requestRaw(authToken, '/malappinfo.php', {
 		query: {

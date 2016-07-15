@@ -1,4 +1,4 @@
-import {requestList, post} from '../utils/request';
+import {list, post} from '../utils/request';
 import {checkAddResponse, includesText} from '../utils';
 
 const debug = require('debug')('popura:listable');
@@ -18,7 +18,7 @@ export default function listable(state) {
 		 */
 		getAnimeList(username = state.username) {
 			debug(`Getting animelist of ${username}`);
-			return requestList(state.authToken, 'anime', username);
+			return list(state.authToken, 'anime', username);
 		},
 
 		/**
@@ -27,7 +27,7 @@ export default function listable(state) {
 		 */
 		getMangaList(username = state.username) {
 			debug(`Getting mangalist of ${username}`);
-			return requestList(state.authToken, 'manga', username);
+			return list(state.authToken, 'manga', username);
 		},
 
 		/**

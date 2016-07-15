@@ -1,5 +1,5 @@
 import test from 'ava';
-import {requestRaw, get, requestList} from '../../src/utils/request';
+import {requestRaw, get, list} from '../../src/utils/request';
 import {authToken} from '../mock';
 
 test('Can request homepage', t => {
@@ -15,6 +15,6 @@ test('Requesting API should work if loggedin', t => {
 });
 
 test(`Can request an user's anime and manga lists`, t => {
-	t.notThrows(requestList(authToken, 'anime', 'lubien'));
-	t.notThrows(requestList(authToken, 'anime', 'lubien'));
+	t.notThrows(list(authToken, 'anime', 'lubien'));
+	t.notThrows(list(authToken, 'anime', 'lubien'));
 });
