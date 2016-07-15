@@ -28,6 +28,7 @@ export function request(authToken, url = '/', opts = {}) {
 		headers: {
 			Authorization: `Basic ${authToken}`,
 			'User-Agent': userAgent,
+			'Content-Type': opts.method === 'POST' ? 'application/x-www-form-urlencoded' : false,
 		},
 	}));
 }
@@ -90,13 +91,8 @@ export function list(authToken, type, username) {
 export function post(authToken, url = '/', {values = false, expects = false}) {
 	debug(`Posting in MAL's API at ${url}`);
 
-	return got(`http://myanimelist.net/api${url}`, {
+	return request(authToken, `/api${url}`, {
 		method: 'POST',
-		headers: {
-			Authorization: `Basic ${authToken}`,
-			'User-Agent': userAgent,
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
 		body: values ? {data: xmlBuilder(values)} : false,
 	})
 		.then(({body = ''}) => {
