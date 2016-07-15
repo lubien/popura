@@ -1,14 +1,8 @@
 import {requestList, post} from '../utils/request';
+import {checkAddResponse, includesText} from '../utils';
 
 const debug = require('debug')('popura:listable');
 
-/**
- * Let me explain this shit. Sometimes, MAL returns '201 Created'.
- * Sometimes it returns a transation ID.
- */
-const checkAddResponse = body => (
-	body && (Number(body) > 0 || body.includes('201 Created'))
-);
 
 /**
  * Composes an object that abstracts MAL's lists API
@@ -68,7 +62,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		updateAnime(id, values = {}) {
-			return post(state.authToken, `/animelist/update/${id}.xml`, {values, expects: 'Updated'});
+			return post(state.authToken, `/animelist/update/${id}.xml`, {values, expects: includesText('Updated')});
 		},
 
 		/**
@@ -77,7 +71,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		updateManga(id, values = {}) {
-			return post(state.authToken, `/mangalist/update/${id}.xml`, {values, expects: 'Updated'});
+			return post(state.authToken, `/mangalist/update/${id}.xml`, {values, expects: includesText('Updated')});
 		},
 
 		/**
@@ -85,7 +79,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		deleteAnime(id) {
-			return post(state.authToken, `/animelist/delete/${id}.xml`, {expects: 'Deleted'});
+			return post(state.authToken, `/animelist/delete/${id}.xml`, {expects: includesText('Deleted')});
 		},
 
 		/**
@@ -93,7 +87,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		deleteManga(id) {
-			return post(state.authToken, `/mangalist/delete/${id}.xml`, {expects: 'Deleted'});
+			return post(state.authToken, `/mangalist/delete/${id}.xml`, {expects: includesText('Deleted')});
 		},
 	};
 }

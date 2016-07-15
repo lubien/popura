@@ -90,15 +90,6 @@ export function requestList(authToken, type, username) {
 export function post(authToken, url = '/', {values = false, expects = false}) {
 	debug(`Posting in MAL's API at ${url}`);
 
-	let checkerFunction;
-	if (expects) {
-		if (typeof expects === 'string') {
-			checkerFunction = body => body.includes(expects);
-		} else {
-			checkerFunction = expects;
-		}
-	}
-
 	return got(`http://myanimelist.net/api${url}`, {
 		method: 'POST',
 		headers: {
@@ -110,8 +101,8 @@ export function post(authToken, url = '/', {values = false, expects = false}) {
 	})
 		.then(res => {
 			const body = res.body || '';
-			if (expects && !checkerFunction(body)) {
-				debug(`Post was expecting ${expects} instead got`, body);
+			if (expects && !expects(body)) {
+				debug(`Body did not match test function`, body);
 				throw new Error(`Unespected return from MAL server posting at ${url}`);
 			}
 			Promise.resolve(body);
