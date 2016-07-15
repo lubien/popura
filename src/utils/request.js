@@ -87,7 +87,7 @@ export function requestList(authToken, type, username) {
  * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to the raw request.body
  */
-export function postXml(authToken, url = '/', values = false, expects = false) {
+export function postXml(authToken, url = '/', {values = false, expects = false}) {
 	debug(`Posting in MAL's API at ${url}`);
 
 	let checkerFunction;

@@ -46,7 +46,7 @@ export default function listable(state) {
 				values.status = 1;
 			}
 
-			return postXml(state.authToken, `/animelist/add/${id}.xml`, values, checkAddResponse);
+			return postXml(state.authToken, `/animelist/add/${id}.xml`, {values, expects: checkAddResponse});
 		},
 
 		/**
@@ -59,7 +59,7 @@ export default function listable(state) {
 				values.status = 1;
 			}
 
-			return postXml(state.authToken, `/mangalist/add/${id}.xml`, values, checkAddResponse);
+			return postXml(state.authToken, `/mangalist/add/${id}.xml`, {values, expects: checkAddResponse});
 		},
 
 		/**
@@ -68,7 +68,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		updateAnime(id, values = {}) {
-			return postXml(state.authToken, `/animelist/update/${id}.xml`, values, 'Updated');
+			return postXml(state.authToken, `/animelist/update/${id}.xml`, {values, expects: 'Updated'});
 		},
 
 		/**
@@ -77,7 +77,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		updateManga(id, values = {}) {
-			return postXml(state.authToken, `/mangalist/update/${id}.xml`, values, 'Updated');
+			return postXml(state.authToken, `/mangalist/update/${id}.xml`, {values, expects: 'Updated'});
 		},
 
 		/**
@@ -85,7 +85,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		deleteAnime(id) {
-			return postXml(state.authToken, `/animelist/delete/${id}.xml`, false, 'Deleted');
+			return postXml(state.authToken, `/animelist/delete/${id}.xml`, {expects: 'Deleted'});
 		},
 
 		/**
@@ -93,7 +93,7 @@ export default function listable(state) {
 		 * @return {Promise}
 		 */
 		deleteManga(id) {
-			return postXml(state.authToken, `/mangalist/delete/${id}.xml`, false, 'Deleted');
+			return postXml(state.authToken, `/mangalist/delete/${id}.xml`, {expects: 'Deleted'});
 		},
 	};
 }
