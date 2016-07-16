@@ -13,7 +13,8 @@
   "keywords": [
     "myanimelist",
     "mal",
-    "scrap"
+    "API",
+		"wrapper"
   ],
   "repository": {
     "type": "git",
