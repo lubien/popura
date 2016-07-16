@@ -74,13 +74,13 @@ Returns `Promise` => `{myinfo, list}` where `myinfo` is a [Myinfo Model][myinfo-
 
 ### `.addAnime(id, values = {})` and `.addManga(id, values = {})`
 
-Inserts an anime or manga with `id` into your list. Optionally you can define `values` from [Anime Models][anime-model] | [Manga Models][manga-model]. Non-valid values will be ignored.
+Inserts an anime or manga with `id` into your list. Optionally you can define `values` from [Anime Models][anime-model] | [Manga Models][manga-model].
 
 Returns `Promise` => Raw `response.body`.
 
 ### `.updateAnime(id, values = {})` and `updateManga(id, values = {})`
 
-Changes `values` from an anime or manga with `id` in your list. Define `values` from [Anime Models][anime-model] | [Manga Models][manga-model]. Non-valid values will be ignored.
+Changes `values` from an anime or manga with `id` in your list. Define `values` from [Anime Models][anime-model] | [Manga Models][manga-model].
 
 Returns `Promise` => Raw `response.body`.
 
