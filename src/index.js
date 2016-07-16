@@ -1,11 +1,9 @@
-import authenticable from './composers/authenticable';
-import searchable from './composers/searchable';
-import listable from './composers/listable';
+import Popura from './popura';
 
 const debug = require('debug')('popura:factory');
 
 /**
- * Factory function that composes an instance of popura
+ * Factory function that returns an instance of popura
  *
  * @param  {string} username = ''
  * @param  {string} password = ''
@@ -16,15 +14,5 @@ export default function popuraFactory(username = '', password = '') {
 		`New mal client user '${username}'. Use password = ${Boolean(password)}`
 	);
 
-	const state = {
-		username,
-		password,
-		authToken: '',
-	};
-
-	return Object.assign({},
-		authenticable(state),
-		searchable(state),
-		listable(state)
-	);
+	return new Popura(username, password);
 }

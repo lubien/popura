@@ -18,12 +18,6 @@ export const authToken = generateAuthToken(
   process.env.MAL_PASS
 );
 
-export const state = {
-	username: process.env.MAL_USER,
-	password: process.env.MAL_PASS,
-	authToken,
-};
-
 // Tachumaru Gekijou
 export const TEST_ANIME_ID = process.env.TEST_ANIME_ID || 9562;
 // Junshin Miracle 100%
