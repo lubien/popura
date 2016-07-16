@@ -20,9 +20,6 @@
 * [Install](#install)
 * [Usage](#usage)
 * [API](#api)
- * [Authenticable](#authenticable)
- * [Searchable](#searchable)
- * [Listable](#listable)
 * [Models](#models)
  * [Anime Model][anime-model]
  * [Manga Model][manga-model]
@@ -49,51 +46,45 @@ client.getAnimeList()
 
 ## API
 
-### Authenticable
-
-#### `.getUser()`
+### `.getUser()`
 
 Return the current user's username.
 
-#### `.setUser(username, password)`
+### `.setUser(username, password)`
 
 Change the current user in this client instance.
 
-#### `.verifyCredentials()`
+### `.verifyCredentials()`
 
 Check if this user is valid.
 
 Returns `Promise` => `{id, username}`.
 
-### Searchable
-
-#### `.searchAnimes(name)` and `.searchMangas(name)`
+### `.searchAnimes(name)` and `.searchMangas(name)`
 
 Search for an anime or manga title by `name`.
 
 Returns `Promise` => Array of [Anime Models][anime-model] | [Manga Models][manga-model].
 
-### Listable
-
-#### `.getAnimeList(username = this.user)` and `.getMangaList(username = this.user)`
+### `.getAnimeList(username = this.user)` and `.getMangaList(username = this.user)`
 
 Get the animelist or mangalist from an user. If `username` is empty, returns current user's list.
 
 Returns `Promise` => `{myinfo, list}` where `myinfo` is a [Myinfo Model][myinfo-model] and `list` is an array of animes | mangas.
 
-#### `.addAnime(id, values = {})` and `.addManga(id, values = {})`
+### `.addAnime(id, values = {})` and `.addManga(id, values = {})`
 
 Inserts an anime or manga with `id` into your list. Optionally you can define `values` from [Anime Models][anime-model] | [Manga Models][manga-model]. Non-valid values will be ignored.
 
 Returns `Promise` => Raw `response.body`.
 
-#### `.updateAnime(id, values = {})` and `updateManga(id, values = {})`
+### `.updateAnime(id, values = {})` and `updateManga(id, values = {})`
 
 Changes `values` from an anime or manga with `id` in your list. Define `values` from [Anime Models][anime-model] | [Manga Models][manga-model]. Non-valid values will be ignored.
 
 Returns `Promise` => Raw `response.body`.
 
-#### `.deleteAnime(id)` and `deleteManga(id)`
+### `.deleteAnime(id)` and `deleteManga(id)`
 
 Removes an anime or manga with `id` from your list.
 
