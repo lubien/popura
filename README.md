@@ -23,6 +23,8 @@
 * [Models](#models)
  * [Anime Model][anime-model]
  * [Manga Model][manga-model]
+ * [Anime List Item Model][anime-list-item-model]
+ * [Manga List Item Model][manga-list-item-model]
  * [Myinfo Model][myinfo-model]
 * [Development](#development)
 * [License](#license)
@@ -70,7 +72,7 @@ Returns `Promise` => Array of [Anime Models][anime-model] | [Manga Models][manga
 
 Get the animelist or mangalist from an user. If `username` is empty, returns current user's list.
 
-Returns `Promise` => `{myinfo, list}` where `myinfo` is a [Myinfo Model][myinfo-model] and `list` is an array of animes | mangas.
+Returns `Promise` => `{myinfo, list}` where `myinfo` is a [Myinfo Model][myinfo-model] and `list` is an array of [Anime List Item Models][anime-list-item-model] | [Manga List Item Models][manga-list-item-model].
 
 ### `.addAnime(id, values = {})` and `.addManga(id, values = {})`
 
@@ -94,6 +96,8 @@ Returns `Promise` => Raw `response.body`.
 
 ### Anime Model
 
+Model used to add/update animes
+
 Property | Type | Note
 -------- | ---- | ----
 episode | int
@@ -114,6 +118,8 @@ tags | `array`
 
 ### Manga Model
 
+Model used to add/update mangas
+
 Property | Type | Note
 -------- | ---- | ----
 chapter | int
@@ -131,6 +137,58 @@ comments | `string`
 scan_group | `string`
 tags | `array`
 retail_volumes | `int`
+
+### Anime List Item Model
+
+Model you receive from API when requesting anime list
+
+Property | Type | Note
+-------- | ---- | ----
+series_animedb_id | `int`
+series_title | `string`
+series_synonyms | `array`
+series_type | `int` | TODO: figure out the meaning of these `int`s
+series_episodes | `int`
+series_status | `int` | TODO: figure out the meaning of these `int`s
+series_start | `date` | `mmddyyyy`
+series_end | `date` | `mmddyyyy`
+my_id | `int`
+my_watched_episodes | `int`
+my_start_date | `date` | `mmddyyyy`
+my_finish_date | `date` | `mmddyyyy`
+my_score | `int`
+my_status | `int` | `1` = `watching`, `2` = `completed`, `3` = `onhold`, `4` = `dropped`, `6` = `plantowatch`
+my_rewatching | `int`
+my_rewatching_ep | `int`
+my_last_updated | `date` | `mmddyyyy`
+my_tags | `array`
+
+### Manga List Item Model
+
+Model you receive from API when requesting anime list
+
+Property | Type | Note
+-------- | ---- | ----
+series_mangadb_id | `int`
+series_title | `string`
+series_synonyms | `array`
+series_type | `int` | TODO: figure out the meaning of these `int`s
+series_chapters | `int`
+series_volumes | `int`
+series_status | `int` | TODO: figure out the meaning of these `int`s
+series_start | `date` | `mmddyyyy`
+series_end | `date` | `mmddyyyy`
+my_id | `int`
+my_read_chapters | `int`
+my_read_volumes | `int`
+my_start_date | `date` | `mmddyyyy`
+my_finish_date | `date` | `mmddyyyy`
+my_score | `int`
+my_status | `int` | `1` = `reading`, `2` = `completed`, `3` = `onhold`, `4` = `dropped`, `6` = `plantoread`
+my_rereadingg | `int` | Please note that the double 'g' at the end is MAL's fault
+my_rereading_chap | `int`
+my_last_updated | `date` | `mmddyyyy`
+my_tags | `array`
 
 ### Myinfo Model
 
@@ -160,3 +218,5 @@ In some tests, it'll add, update and remove one anime and one manga from your li
 [myinfo-model]: #myinfo-model
 [anime-model]: #anime-model
 [manga-model]: #manga-model
+[anime-list-item-model]: #anime-list-item-model
+[manga-list-item-model]: #manga-list-item-model
