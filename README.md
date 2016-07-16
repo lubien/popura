@@ -6,7 +6,12 @@
 [![Coverage Status](https://coveralls.io/repos/github/lubien/popura/badge.svg?branch=master)](https://coveralls.io/github/lubien/popura?branch=master)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-<p align="center"><img src="http://i.imgur.com/afidy6U.gif" alt="Popura"/></p>
+<p align="center">
+  <a href="http://www.pixiv.net/member.php?id=1722912" title="Popura by yotsu"><img src="http://i.imgur.com/Iarmq6S.png" alt="Popura by yotsu"/></a>
+  <p align="center" style="color: #babac4">
+    Image by <a href="http://www.pixiv.net/member.php?id=1722912" title="yotsu">yotsu</a>
+  </p>
+</p>
 
 [Popura](http://myanimelist.net/character/24417/Popura_Taneshima) is a promise-returning wrapper for MAL API.
 
@@ -15,12 +20,11 @@
 * [Install](#install)
 * [Usage](#usage)
 * [API](#api)
- * [Authenticable](#authenticable)
- * [Searchable](#searchable)
- * [Listable](#listable)
 * [Models](#models)
  * [Anime Model][anime-model]
  * [Manga Model][manga-model]
+ * [Anime List Item Model][anime-list-item-model]
+ * [Manga List Item Model][manga-list-item-model]
  * [Myinfo Model][myinfo-model]
 * [Development](#development)
 * [License](#license)
@@ -44,51 +48,45 @@ client.getAnimeList()
 
 ## API
 
-### Authenticable
-
-#### `.getUser()`
+### `.getUser()`
 
 Return the current user's username.
 
-#### `.setUser(username, password)`
+### `.setUser(username, password)`
 
 Change the current user in this client instance.
 
-#### `.verifyCredentials()`
+### `.verifyCredentials()`
 
 Check if this user is valid.
 
 Returns `Promise` => `{id, username}`.
 
-### Searchable
-
-#### `.searchAnimes(name)` and `.searchMangas(name)`
+### `.searchAnimes(name)` and `.searchMangas(name)`
 
 Search for an anime or manga title by `name`.
 
 Returns `Promise` => Array of [Anime Models][anime-model] | [Manga Models][manga-model].
 
-### Listable
-
-#### `.getAnimeList(username = this.user)` and `.getMangaList(username = this.user)`
+### `.getAnimeList(username = this.user)` and `.getMangaList(username = this.user)`
 
 Get the animelist or mangalist from an user. If `username` is empty, returns current user's list.
 
-Returns `Promise` => `{myinfo, list}` where `myinfo` is a [Myinfo Model][myinfo-model] and `list` is an array of animes | mangas.
+Returns `Promise` => `{myinfo, list}` where `myinfo` is a [Myinfo Model][myinfo-model] and `list` is an array of [Anime List Item Models][anime-list-item-model] | [Manga List Item Models][manga-list-item-model].
 
-#### `.addAnime(id, values = {})` and `.addManga(id, values = {})`
+### `.addAnime(id, values = {})` and `.addManga(id, values = {})`
 
-Inserts an anime or manga with `id` into your list. Optionally you can define `values` from [Anime Models][anime-model] | [Manga Models][manga-model]. Non-valid values will be ignored.
-
-Returns `Promise` => Raw `response.body`.
-
-#### `.updateAnime(id, values = {})` and `updateManga(id, values = {})`
-
-Changes `values` from an anime or manga with `id` in your list. Define `values` from [Anime Models][anime-model] | [Manga Models][manga-model]. Non-valid values will be ignored.
+Inserts an anime or manga with `id` into your list. Optionally you can define `values` from [Anime Models][anime-model] | [Manga Models][manga-model].
 
 Returns `Promise` => Raw `response.body`.
 
-#### `.deleteAnime(id)` and `deleteManga(id)`
+### `.updateAnime(id, values = {})` and `updateManga(id, values = {})`
+
+Changes `values` from an anime or manga with `id` in your list. Define `values` from [Anime Models][anime-model] | [Manga Models][manga-model].
+
+Returns `Promise` => Raw `response.body`.
+
+### `.deleteAnime(id)` and `deleteManga(id)`
 
 Removes an anime or manga with `id` from your list.
 
@@ -98,133 +96,114 @@ Returns `Promise` => Raw `response.body`.
 
 ### Anime Model
 
-```js
-{
-  episode,
-  status,
-  score,
-  storage_type,
-  storage_value,
-  times_rewatched,
-  rewatch_value,
-  date_start,
-  date_finish,
-  priority,
-  enable_discussion,
-  enable_rewatching,
-  comments,
-  fansub_group,
-  tags,
-}
-```
+Model used to add/update animes
 
-##### Parameters
-
-`episode` => `int`
-
-`status` => `int` or `string` (1/watching, 2/completed, 3/onhold, 4/dropped, 6/plantowatch)
-
-`score` => `int`
-
-`storage_type` => `int`
-
-`storage_value` => `float`
-
-`times_rewatched` => `int`
-
-`rewatch_value` => `int`
-
-`date_start` => `date` (`mmddyyyy`)
-
-`date_finish` => `date` (`mmddyyyy`)
-
-`priority` => `int`
-
-`enable_discussion` => `int` (1 = `enable`, 0 = `disable`)
-
-`enable_rewatching` => `int` (1 = `enable`, 0 = `disable`)
-
-`comments` => `string`
-
-`fansub_group` => `string`
-
-`tags` => `string` (tags separated by commas)
+Property | Type | Note
+-------- | ---- | ----
+episode | int
+status | `int` or `string` | `1` / `watching`, `2` / `completed`, `3` / `onhold`, `4` / `dropped`, `6` / `plantowatch`
+score | `int`
+storage_type | `int`
+storage_value | `float`
+times_rewatched | `int`
+rewatch_value | `int`
+date_start | `date` | `mmddyyyy`
+date_finish | `date` | `mmddyyyy`
+priority | `int`
+enable_discussion | `int` | `1` = enable, `0` = disable
+enable_rewatching | `int` | `1` = enable, `0` = disable
+comments | `string`
+fansub_group | `string`
+tags | `array`
 
 ### Manga Model
 
-```js
-{
-  chapter,
-  volume,
-  status,
-  score,
-  times_reread,
-  reread_value,
-  date_start,
-  date_finish,
-  priority,
-  enable_discussion,
-  enable_rereading,
-  comments,
-  scan_group,
-  tags,
-  retail_volumes,
-}
-```
+Model used to add/update mangas
 
-##### Parameters
+Property | Type | Note
+-------- | ---- | ----
+chapter | int
+volume | int
+status | `int` or `string` | `1` / `reading`, `2` / `completed`, `3` / `onhold`, `4` / `dropped`, `6` / `plantoread`
+score | `int`
+times_reread | `int`
+reread_value | `int`
+date_start | `date` | `mmddyyyy`
+date_finish | `date` | `mmddyyyy`
+priority | `int`
+enable_discussion | `int` | `1` = enable, `0` = disable
+enable_rereading | `int` | `1` = enable, `0` = disable
+comments | `string`
+scan_group | `string`
+tags | `array`
+retail_volumes | `int`
 
-`chapter` => `int`
+### Anime List Item Model
 
-`volume` => `int`
+Model you receive from API when requesting anime list
 
-`status` => `int` or `string` (1/reading, 2/completed, 3/onhold, 4/dropped, 6/plantoread)
+Property | Type | Note
+-------- | ---- | ----
+series_animedb_id | `int`
+series_title | `string`
+series_synonyms | `array`
+series_type | `int` | TODO: figure out the meaning of these `int`s
+series_episodes | `int`
+series_status | `int` | TODO: figure out the meaning of these `int`s
+series_start | `date` | `mmddyyyy`
+series_end | `date` | `mmddyyyy`
+my_id | `int`
+my_watched_episodes | `int`
+my_start_date | `date` | `mmddyyyy`
+my_finish_date | `date` | `mmddyyyy`
+my_score | `int`
+my_status | `int` | `1` = `watching`, `2` = `completed`, `3` = `onhold`, `4` = `dropped`, `6` = `plantowatch`
+my_rewatching | `int`
+my_rewatching_ep | `int`
+my_last_updated | `date` | `mmddyyyy`
+my_tags | `array`
 
-`score` => `int`
+### Manga List Item Model
 
-`times_reread` => `int`
+Model you receive from API when requesting anime list
 
-`reread_value` => `int`
-
-`date_start` => `date` (`mmddyyyy`)
-
-`date_finish` => `date` (`mmddyyyy`)
-
-`priority` => `int`
-
-`enable_discussion` => `int` (1 = `enable`, 0 = `disable`)
-
-`enable_rereading` => `int` (1 = `enable`, 0 = `disable`)
-
-`comments` => `string`
-
-`scan_group` => `string`
-
-`tags` => `string` (tags separated by commas)
-
-`retail_volumes` => `int`
+Property | Type | Note
+-------- | ---- | ----
+series_mangadb_id | `int`
+series_title | `string`
+series_synonyms | `array`
+series_type | `int` | TODO: figure out the meaning of these `int`s
+series_chapters | `int`
+series_volumes | `int`
+series_status | `int` | TODO: figure out the meaning of these `int`s
+series_start | `date` | `mmddyyyy`
+series_end | `date` | `mmddyyyy`
+my_id | `int`
+my_read_chapters | `int`
+my_read_volumes | `int`
+my_start_date | `date` | `mmddyyyy`
+my_finish_date | `date` | `mmddyyyy`
+my_score | `int`
+my_status | `int` | `1` = `reading`, `2` = `completed`, `3` = `onhold`, `4` = `dropped`, `6` = `plantoread`
+my_rereading | `int`
+my_rereading_chap | `int`
+my_last_updated | `date` | `mmddyyyy`
+my_tags | `array`
 
 ### Myinfo Model
-```js
-{
-  user_id,
-  user_name,
-  [user_watching | user_reading], // [for anime | for manga]
-  user_completed,
-  user_onhold,
-  user_dropped,
-  [user_plantowatch | user_plantoread],
-  user_days_spent_watching, // Yes, they use 'watching' for manga too
-}
-```
 
-##### Parameters
-
-`user_name` => `string`
-
-`user_days_spent_watching` => `float`
-
-Others => `int`
+Property | Type | Note
+-------- | ---- | ----
+user_id | `int`
+user_name | `string`
+user_watching | `int` | Only for anime
+user_reading | `int` | Only for manga
+user_completed | `int`
+user_onhold | `int`
+user_dropped | `int`
+user_plantowatch | `int` | Only for anime
+user_plantoread | `int` | Only for manga
+user_days_spent_watching | `float` | Yes, they use 'watching' for manga too
 
 ## Development
 
@@ -239,3 +218,5 @@ In some tests, it'll add, update and remove one anime and one manga from your li
 [myinfo-model]: #myinfo-model
 [anime-model]: #anime-model
 [manga-model]: #manga-model
+[anime-list-item-model]: #anime-list-item-model
+[manga-list-item-model]: #manga-list-item-model

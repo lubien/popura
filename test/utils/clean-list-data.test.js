@@ -3,12 +3,10 @@ import cleanListData from '../../src/utils/clean-list-data';
 
 test('Can clean anime lists', t => {
 	const example = {
-		myanimelist: {
-			myinfo: [{foo: ['bar']}],
-			anime: [
-				{foo: ['bar']},
-			],
-		},
+		myinfo: {foo: 'bar'},
+		anime: [
+			{foo: 'bar'},
+		],
 	};
 
 	t.deepEqual(cleanListData(example), {
@@ -21,12 +19,10 @@ test('Can clean anime lists', t => {
 
 test('Can clean manga lists', t => {
 	const example = {
-		myanimelist: {
-			myinfo: [{foo: ['bar']}],
-			manga: [
-				{foo: ['bar']},
-			],
-		},
+		myinfo: {foo: 'bar'},
+		manga: [
+			{foo: 'bar'},
+		],
 	};
 
 	t.deepEqual(cleanListData(example), {
@@ -39,9 +35,7 @@ test('Can clean manga lists', t => {
 
 test('Can clean empty lists', t => {
 	const example = {
-		myanimelist: {
-			myinfo: [{foo: ['bar']}],
-		},
+		myinfo: {foo: 'bar'},
 	};
 
 	t.deepEqual(cleanListData(example), {

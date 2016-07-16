@@ -1,22 +1,25 @@
 import got from 'got';
-import xml2js from 'xml2js-es6-promise';
-import cleanApiData from './clean-api-data';
-import cleanListData from './clean-list-data';
+import {
+	xmlParser,
+	xmlBuilder,
+	cleanApiData,
+	cleanListData,
+} from './';
 
 const debug = require('debug')('popura:request');
-const pkg = require('../../package.json');
+const {version} = require('../../package.json');
 
-const userAgent = `popura/${pkg.version} (https://github.com/lubien/popura)`;
+const userAgent = `popura/${version} (https://github.com/lubien/popura)`;
 
 /**
  * HTTP Request a page from MAL
  *
- * @param  {string} - Basic Authentication token
+ * @param  {string} authToken - Basic Authentication token
  * @param  {string} url = '/'
  * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to the raw request body
  */
-export function requestRaw(authToken, url = '/', opts = {}) {
+export function request(authToken, url = '/', opts = {}) {
 	debug(
 		`Requesting ${url} with. Use auth: ${Boolean(authToken)}. Query`,
 		opts.query
@@ -25,30 +28,29 @@ export function requestRaw(authToken, url = '/', opts = {}) {
 		headers: {
 			Authorization: `Basic ${authToken}`,
 			'User-Agent': userAgent,
+			'Content-Type': opts.method === 'POST' ? 'application/x-www-form-urlencoded' : false,
 		},
 	}));
 }
 
-// TODO: function requestHtml()
-
 /**
  * Request MAL's API XML, then parses as JSON and clean it
  *
- * @param  {string} - Basic Authentication token
+ * @param  {string} authToken - Basic Authentication token
  * @param  {string} url = '/'
  * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to a parsed as JSON and
  * cleaned version of MAL's API response
  */
-export function requestApi(authToken, url = '/', opts = {}) {
+export function get(authToken, url = '/', opts = {}) {
 	if (!authToken) {
 		debug('Not authenticated');
 		throw new Error('Must have username and password set to access the API');
 	}
 
-	return requestRaw(authToken, `/api${url}`, opts)
-		.then(res => xml2js(res.body))
-		.then(parsedXml => Promise.resolve(cleanApiData(parsedXml)));
+	return request(authToken, `/api${url}`, opts)
+		.then(({body}) => xmlParser(body))
+		.then(cleanApiData);
 }
 
 /**
@@ -60,58 +62,44 @@ export function requestApi(authToken, url = '/', opts = {}) {
  * @return {Promise} - Resolves to {myinfo: {...}, list: [...]}
  * where myinfo constains info about the user and the list.
  */
-export function requestList(authToken, type, username) {
+export function list(authToken, type, username) {
 	debug(`Requesting ${type}list of ${username}`);
-	return requestRaw(authToken, '/malappinfo.php', {
+	return request(authToken, '/malappinfo.php', {
 		query: {
 			u: username,
 			type,
 		},
 	})
-		.then(res => xml2js(res.body))
-		.then(parsedXml => {
-			if (parsedXml.myanimelist.error) {
-				throw new Error(parsedXml.myanimelist.error);
+		.then(({body}) => xmlParser(body))
+		.then(parsed => {
+			if (parsed.error) {
+				throw new Error(parsed.error);
 			}
-			return Promise.resolve(parsedXml);
+			return parsed;
 		})
-		.then(parsedXml => Promise.resolve(cleanListData(parsedXml)));
+		.then(cleanListData);
 }
 
 /**
  * Sends XML to the MAL API
  *
- * @param  {string} - Basic Authentication token
+ * @param  {string} authToken - Basic Authentication token
  * @param  {string} url = '/'
  * @param  {object} opts = {} - Request options
  * @return {Promise} - Resolves to the raw request.body
  */
-export function postXml(authToken, url = '/', opts = {}, expects = false) {
+export function post(authToken, url = '/', {values = false, expects = false}) {
 	debug(`Posting in MAL's API at ${url}`);
 
-	let checkerFunction;
-	if (expects) {
-		if (typeof expects === 'string') {
-			checkerFunction = body => body.includes(expects);
-		} else {
-			checkerFunction = expects;
-		}
-	}
-
-	return got(`http://myanimelist.net/api${url}`, Object.assign(opts, {
+	return request(authToken, `/api${url}`, {
 		method: 'POST',
-		headers: {
-			Authorization: `Basic ${authToken}`,
-			'User-Agent': userAgent,
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-	}))
-		.then(res => {
-			const body = res.body || '';
-			if (expects && !checkerFunction(body)) {
-				debug(`Post was expecting ${expects} instead got`, body);
+		body: values ? {data: xmlBuilder(values)} : false,
+	})
+		.then(({body = ''}) => {
+			if (expects && !expects(body)) {
+				debug(`Body did not match test function`, body);
 				throw new Error(`Unespected return from MAL server posting at ${url}`);
 			}
-			Promise.resolve(body);
+			return body;
 		});
 }
