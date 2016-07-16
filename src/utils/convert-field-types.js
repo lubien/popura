@@ -37,7 +37,7 @@ export default function convertFieldTypes(obj) {
 				result[key] = value;
 			}
 		}
-	};
+	}
 
 	return result;
 }
