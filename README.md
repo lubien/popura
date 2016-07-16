@@ -6,7 +6,12 @@
 [![Coverage Status](https://coveralls.io/repos/github/lubien/popura/badge.svg?branch=master)](https://coveralls.io/github/lubien/popura?branch=master)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-<p align="center"><img src="http://i.imgur.com/afidy6U.gif" alt="Popura"/></p>
+<p align="center">
+  <a href="http://www.pixiv.net/member.php?id=1722912" title="Popura by yotsu"><img src="http://i.imgur.com/Iarmq6S.png" alt="Popura by yotsu"/></a>
+  <p align="center" style="color: #babac4">
+    Image by <a href="http://www.pixiv.net/member.php?id=1722912" title="yotsu">yotsu</a>
+  </p>
+</p>
 
 [Popura](http://myanimelist.net/character/24417/Popura_Taneshima) is a promise-returning wrapper for MAL API.
 
