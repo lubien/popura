@@ -103,133 +103,58 @@ Returns `Promise` => Raw `response.body`.
 
 ### Anime Model
 
-```js
-{
-  episode,
-  status,
-  score,
-  storage_type,
-  storage_value,
-  times_rewatched,
-  rewatch_value,
-  date_start,
-  date_finish,
-  priority,
-  enable_discussion,
-  enable_rewatching,
-  comments,
-  fansub_group,
-  tags,
-}
-```
-
-##### Parameters
-
-`episode` => `int`
-
-`status` => `int` or `string` (1/watching, 2/completed, 3/onhold, 4/dropped, 6/plantowatch)
-
-`score` => `int`
-
-`storage_type` => `int`
-
-`storage_value` => `float`
-
-`times_rewatched` => `int`
-
-`rewatch_value` => `int`
-
-`date_start` => `date` (`mmddyyyy`)
-
-`date_finish` => `date` (`mmddyyyy`)
-
-`priority` => `int`
-
-`enable_discussion` => `int` (1 = `enable`, 0 = `disable`)
-
-`enable_rewatching` => `int` (1 = `enable`, 0 = `disable`)
-
-`comments` => `string`
-
-`fansub_group` => `string`
-
-`tags` => `string` (tags separated by commas)
+Property | Type | Note
+-------- | ---- | ----
+episode | int
+status | `int` or `string` | `1` / `watching`, `2` / `completed`, `3` / `onhold`, `4` / `dropped`, `6` / `plantowatch`
+score | `int`
+storage_type | `int`
+storage_value | `float`
+times_rewatched | `int`
+rewatch_value | `int`
+date_start | `date` | `mmddyyyy`
+date_finish | `date` | `mmddyyyy`
+priority | `int`
+enable_discussion | `int` | `1` = enable, `0` = disable
+enable_rewatching | `int` | `1` = enable, `0` = disable
+comments | `string`
+fansub_group | `string`
+tags | `array`
 
 ### Manga Model
 
-```js
-{
-  chapter,
-  volume,
-  status,
-  score,
-  times_reread,
-  reread_value,
-  date_start,
-  date_finish,
-  priority,
-  enable_discussion,
-  enable_rereading,
-  comments,
-  scan_group,
-  tags,
-  retail_volumes,
-}
-```
-
-##### Parameters
-
-`chapter` => `int`
-
-`volume` => `int`
-
-`status` => `int` or `string` (1/reading, 2/completed, 3/onhold, 4/dropped, 6/plantoread)
-
-`score` => `int`
-
-`times_reread` => `int`
-
-`reread_value` => `int`
-
-`date_start` => `date` (`mmddyyyy`)
-
-`date_finish` => `date` (`mmddyyyy`)
-
-`priority` => `int`
-
-`enable_discussion` => `int` (1 = `enable`, 0 = `disable`)
-
-`enable_rereading` => `int` (1 = `enable`, 0 = `disable`)
-
-`comments` => `string`
-
-`scan_group` => `string`
-
-`tags` => `string` (tags separated by commas)
-
-`retail_volumes` => `int`
+Property | Type | Note
+-------- | ---- | ----
+chapter | int
+volume | int
+status | `int` or `string` | `1` / `reading`, `2` / `completed`, `3` / `onhold`, `4` / `dropped`, `6` / `plantoread`
+score | `int`
+times_reread | `int`
+reread_value | `int`
+date_start | `date` | `mmddyyyy`
+date_finish | `date` | `mmddyyyy`
+priority | `int`
+enable_discussion | `int` | `1` = enable, `0` = disable
+enable_rereading | `int` | `1` = enable, `0` = disable
+comments | `string`
+scan_group | `string`
+tags | `array`
+retail_volumes | `int`
 
 ### Myinfo Model
-```js
-{
-  user_id,
-  user_name,
-  [user_watching | user_reading], // [for anime | for manga]
-  user_completed,
-  user_onhold,
-  user_dropped,
-  [user_plantowatch | user_plantoread],
-  user_days_spent_watching, // Yes, they use 'watching' for manga too
-}
-```
 
-##### Parameters
-
-`user_name` => `string`
-
-`user_days_spent_watching` => `float`
-
-Others => `int`
+Property | Type | Note
+-------- | ---- | ----
+user_id | `int`
+user_name | `string`
+user_watching | `int` | Only for anime
+user_reading | `int` | Only for manga
+user_completed | `int`
+user_onhold | `int`
+user_dropped | `int`
+user_plantowatch | `int` | Only for anime
+user_plantoread | `int` | Only for manga
+user_days_spent_watching | `float` | Yes, they use 'watching' for manga too
 
 ## Development
 
