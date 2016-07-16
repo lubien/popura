@@ -185,7 +185,7 @@ my_start_date | `date` | `mmddyyyy`
 my_finish_date | `date` | `mmddyyyy`
 my_score | `int`
 my_status | `int` | `1` = `reading`, `2` = `completed`, `3` = `onhold`, `4` = `dropped`, `6` = `plantoread`
-my_rereadingg | `int` | Please note that the double 'g' at the end is MAL's fault
+my_rereading | `int`
 my_rereading_chap | `int`
 my_last_updated | `date` | `mmddyyyy`
 my_tags | `array`

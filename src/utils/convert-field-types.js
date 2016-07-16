@@ -21,6 +21,12 @@ export default function convertFieldTypes(obj) {
 				break;
 			}
 
+			case 'my_rereadingg': {
+				// Notice tha this field have double 'g' at the end of the name -.-"
+				result['my_rereading'] = value;
+				break;
+			}
+
 			case 'tags':
 			case 'my_tags': {
 				result[key] = splitBy(',', value);
