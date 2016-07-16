@@ -1,6 +1,6 @@
 {
   "name": "popura",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Promise-returning wrapper for MyAnimeList API",
   "main": "lib/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "myanimelist",
     "mal",
     "API",
-		"wrapper"
+    "wrapper"
   ],
   "repository": {
     "type": "git",
