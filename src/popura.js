@@ -62,7 +62,7 @@ export default class Popura {
 	 */
 	searchMangas(title) {
 		debug(`Searching for the manga '${title}'`);
-		return this._get(`/anime/search.xml`, {
+		return this._get(`/manga/search.xml`, {
 			query: {q: title},
 		});
 	}

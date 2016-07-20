@@ -57,7 +57,7 @@ Return the current user's username.
 
 Change the current user in this client instance.
 
-### `.verifyCredentials()`
+### `.verifyAuth()`
 
 Check if this user is valid.
 
