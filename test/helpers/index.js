@@ -1,11 +1,11 @@
 import path from 'path';
 import dotenv from 'dotenv';
-import popura from '../src';
-import generateAuthToken from '../src/utils/generate-auth-token';
+import popura from '../../src';
+import generateAuthToken from '../../src/utils/generate-auth-token';
 
 dotenv.config({
 	silent: true,
-	path: path.join(__dirname, '../.env'),
+	path: path.join(__dirname, '../../.env'),
 });
 
 export const instance = popura(

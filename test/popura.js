@@ -1,6 +1,6 @@
 import test from 'ava';
 import Popura from '../src/popura';
-import {instance, TEST_ANIME_ID, TEST_MANGA_ID} from './mock';
+import {instance, TEST_ANIME_ID, TEST_MANGA_ID} from './helpers';
 
 test('Can get your username', t => {
 	const me = new Popura('lubien', '');
@@ -15,13 +15,13 @@ test('You can reset the username and password', t => {
 });
 
 test('You can verify your auth', async t => {
-	const credentials = await instance.verifyCredentials();
+	const credentials = await instance.verifyAuth();
 	t.is(credentials.username, instance.getUser());
 });
 
 test('Verifying an dummy user will throw', t => {
 	const dummy = new Popura('dummy', 'dummy');
-	t.throws(dummy.verifyCredentials());
+	t.throws(dummy.verifyAuth());
 });
 
 test('Can search for animes', async () => {
@@ -35,6 +35,10 @@ test('Can search for mangas', async () => {
 test(`Can get user's anime and manga lists`, async () => {
 	await instance.getAnimeList();
 	await instance.getMangaList();
+});
+
+test(`Trying to get lists of unexisting users will throw`, t => {
+	t.throws(instance.getAnimeList('theres no user with space in name'));
 });
 
 test(`Can get other user's anime and manga lists`, async () => {

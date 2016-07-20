@@ -4,7 +4,7 @@
   "description": "Promise-returning wrapper for MyAnimeList API",
   "main": "lib/index.js",
   "scripts": {
-    "test": "xo src/* && ava test/**/*.test.js --require babel-register",
+    "test": "xo src/* && ava test/ --require babel-register",
     "test-coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "build": "babel src --out-dir lib",
     "prepublish": "npm run build",

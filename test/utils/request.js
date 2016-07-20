@@ -1,6 +1,6 @@
 import test from 'ava';
 import request from '../../src/utils/request';
-import {authToken} from '../mock';
+import {authToken} from '../helpers';
 
 test('Can request homepage', t => {
 	t.notThrows(request(authToken, '/'));
