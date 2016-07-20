@@ -52,10 +52,7 @@ export default class Popura {
 	 * @return {Promise}
 	 */
 	searchAnimes(title) {
-		debug(`Searching for the anime '${title}'`);
-		return this._get(`/anime/search.xml`, {
-			query: {q: title},
-		});
+		return this._search('anime', title);
 	}
 
 	/**
@@ -63,10 +60,7 @@ export default class Popura {
 	 * @return {Promise}
 	 */
 	searchMangas(title) {
-		debug(`Searching for the manga '${title}'`);
-		return this._get(`/manga/search.xml`, {
-			query: {q: title},
-		});
+		return this._search('manga', title);
 	}
 
 	/**
@@ -158,6 +152,22 @@ export default class Popura {
 		return request(this._authToken, `/api${url}`, opts)
 			.then(({body}) => xmlParser(body))
 			.then(cleanApiData);
+	}
+
+	/**
+	 * @param {string} type
+	 * @param {string} title
+	 * @return {Promise}
+	 */
+	_search(type, title) {
+		debug(`Searching for ${type} named '${title}'`);
+
+		return this._get(`/${type}/search.xml`, {
+			query: {q: title},
+		})
+			// Be sure to return an array since the XML parser
+			// doesn't recognize single node XML results as array
+			.then(result => Array.isArray(result) ? result : [result]);
 	}
 
 	/**

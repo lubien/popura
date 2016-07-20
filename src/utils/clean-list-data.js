@@ -23,10 +23,15 @@ export default function cleanListData({myinfo, anime, manga}) {
 
 	const type = anime || manga || false;
 
-	if (type) {
+	if (Array.isArray(type)) {
 		type.forEach(item => {
 			cleanData.list.push(convertFieldTypes(item));
 		});
+	// What happens is that the XML parser returns
+	// a single value when there's only one node
+	// of the same name.
+	} else if (type) {
+		cleanData.list.push(convertFieldTypes(type));
 	}
 
 	return cleanData;
