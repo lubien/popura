@@ -9,7 +9,7 @@ export {cleanApiData};
 export {cleanListData};
 export {convertFieldTypes};
 export {generateAuthToken};
-export * from './request';
+export {default as request} from './request';
 export {xmlParser};
 export {xmlBuilder};
 

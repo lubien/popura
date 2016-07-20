@@ -1,7 +1,9 @@
 import {
-	get,
-	list,
-	post,
+	request,
+	cleanApiData,
+	cleanListData,
+	xmlParser,
+	xmlBuilder,
 	generateAuthToken,
 	checkAddResponse,
 	includesText,
@@ -147,11 +149,15 @@ export default class Popura {
 
 	/**
 	 * @param {string} url
-	 * @param {object} opt
+	 * @param {object} opts
 	 * @return {Promise}
 	 */
-	_get(url, opt) {
-		return get(this._authToken, url, opt);
+	_get(url, opts) {
+		debug(`Requesting ${url}`);
+
+		return request(this._authToken, `/api${url}`, opts)
+			.then(({body}) => xmlParser(body))
+			.then(cleanApiData);
 	}
 
 	/**
@@ -160,16 +166,43 @@ export default class Popura {
 	 * @return {Promise}
 	 */
 	_list(type, username) {
-		return list(this._authToken, type, username);
+		debug(`Requesting ${type}list of ${username}`);
+
+		return request(this._authToken, '/malappinfo.php', {
+			query: {
+				u: username,
+				type,
+			},
+		})
+			.then(({body}) => xmlParser(body))
+			.then(parsed => {
+				if (parsed.error) {
+					throw new Error(parsed.error);
+				}
+				return parsed;
+			})
+			.then(cleanListData);
 	}
 
 	/**
 	 * @param {string} url
-	 * @param {object} opt
+	 * @param {object} opts
 	 * @return {Promise}
 	 */
-	_post(url, opt) {
-		return post(this._authToken, url, opt);
+	_post(url, {values = false, expects = false}) {
+		debug(`Posting in MAL's API at ${url}`);
+
+		return request(this._authToken, `/api${url}`, {
+			method: 'POST',
+			body: values ? {data: xmlBuilder(values)} : false,
+		})
+			.then(({body = ''}) => {
+				if (expects && !expects(body)) {
+					debug(`Body did not match test function`, body);
+					throw new Error(`Unespected return from MAL server posting at ${url}`);
+				}
+				return body;
+			});
 	}
 }
 

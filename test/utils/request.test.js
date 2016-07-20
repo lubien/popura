@@ -1,5 +1,5 @@
 import test from 'ava';
-import {request, get, list} from '../../src/utils/request';
+import request from '../../src/utils/request';
 import {authToken} from '../mock';
 
 test('Can request homepage', t => {
@@ -11,10 +11,6 @@ test('Requesting a non-existant page throws', t => {
 });
 
 test('Requesting API should work if loggedin', t => {
-	t.notThrows(get(authToken, '/account/verify_credentials.xml'));
+	t.notThrows(request(authToken, '/api/account/verify_credentials.xml'));
 });
 
-test(`Can request an user's anime and manga lists`, t => {
-	t.notThrows(list(authToken, 'anime', 'lubien'));
-	t.notThrows(list(authToken, 'anime', 'lubien'));
-});
