@@ -1,17 +1,10 @@
-import cleanApiData from './clean-api-data';
-import cleanListData from './clean-list-data';
-import convertFieldTypes from './convert-field-types';
-import generateAuthToken from './generate-auth-token';
-import xmlParser from './xml-parser';
-import xmlBuilder from './xml-builder';
-
-export {cleanApiData};
-export {cleanListData};
-export {convertFieldTypes};
-export {generateAuthToken};
+export {default as cleanApiData} from './clean-api-data';
+export {default as cleanListData} from './clean-list-data';
+export {default as convertFieldTypes} from './convert-field-types';
+export {default as generateAuthToken} from './generate-auth-token';
 export {default as request} from './request';
-export {xmlParser};
-export {xmlBuilder};
+export {default as xmlParser} from './xml-parser';
+export {default as xmlBuilder} from './xml-builder';
 
 /**
  * Check if a POST adding animes/mangas into MAL API succeeded
