@@ -181,6 +181,7 @@ export default class Popura {
 		return request(this._authToken, '/malappinfo.php', {
 			query: {
 				u: username,
+				status: 'all',
 				type,
 			},
 		})
