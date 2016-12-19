@@ -18,7 +18,7 @@ export default function request(authToken, url = '/', opts = {}) {
 		`Requesting ${url} with. Use auth: ${Boolean(authToken)}. Query`,
 		opts.query
 	);
-	return got(`http://myanimelist.net${url}`, Object.assign(opts, {
+	return got(`https://myanimelist.net${url}`, Object.assign(opts, {
 		headers: {
 			Authorization: `Basic ${authToken}`,
 			'User-Agent': userAgent,
