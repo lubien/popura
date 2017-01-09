@@ -5,7 +5,6 @@ import {
 	xmlParser,
 	xmlBuilder,
 	generateAuthToken,
-	checkAddResponse,
 	includesText,
 } from './utils';
 
@@ -91,7 +90,7 @@ export default class Popura {
 			values.status = 1;
 		}
 
-		return this._post(`/animelist/add/${id}.xml`, {values, expects: checkAddResponse});
+		return this._post(`/animelist/add/${id}.xml`, {values, expects: includesText('Created')});
 	}
 
 	/**
@@ -104,7 +103,7 @@ export default class Popura {
 			values.status = 1;
 		}
 
-		return this._post(`/mangalist/add/${id}.xml`, {values, expects: checkAddResponse});
+		return this._post(`/mangalist/add/${id}.xml`, {values, expects: includesText('Created')});
 	}
 
 	/**

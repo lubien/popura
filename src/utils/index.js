@@ -7,17 +7,6 @@ export {default as xmlParser} from './xml-parser';
 export {default as xmlBuilder} from './xml-builder';
 
 /**
- * Check if a POST adding animes/mangas into MAL API succeeded
- * Why this function? Ramdomly MAL returns a transaction ID
- * of the action.
- *
- * @param {string} body
- * @return {bool}
- */
-export const checkAddResponse = body =>
-	body && (Number(body) > 0 || body.includes('Created'));
-
-/**
  * Given a string, returns a function that checks if it's
  * inside another strings
  *
