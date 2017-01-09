@@ -3,3 +3,6 @@ node_js:
   - "6"
   - "5"
 script: npm run test-coverage
+cache:
+  directories:
+    - node_modules
