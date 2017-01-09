@@ -15,7 +15,7 @@ export {default as xmlBuilder} from './xml-builder';
  * @return {bool}
  */
 export const checkAddResponse = body =>
-	body && (Number(body) > 0 || body.includes('201 Created'));
+	body && (Number(body) > 0 || body.includes('Created'));
 
 /**
  * Given a string, returns a function that checks if it's
