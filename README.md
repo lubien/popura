@@ -1,4 +1,4 @@
-#popura
+# popura
 
 > NodeJS wrapper for MyAnimeList API
 
@@ -148,9 +148,9 @@ Property | Type | Note
 series_animedb_id | `int`
 series_title | `string`
 series_synonyms | `array`
-series_type | `int` | TODO: figure out the meaning of these `int`s
+series_type | `int` | `1` = `TV`, `2` = `OVA`, `3` = `Movie`, `4` = `Special`, `5` = `ONA`, `6` = `Music`
 series_episodes | `int`
-series_status | `int` | TODO: figure out the meaning of these `int`s
+series_status | `int` | `1` = `Airing`, `2` = `Finished`, `3` = `Not Yet Aired`
 series_start | `date` | `mmddyyyy`
 series_end | `date` | `mmddyyyy`
 my_id | `int`
