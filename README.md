@@ -16,6 +16,10 @@
 
 [Popura](http://myanimelist.net/character/24417/Popura_Taneshima) is a promise-returning wrapper for MAL API.
 
+## Warning
+
+[MAL API is broken](https://myanimelist.net/forum/?topicid=1731860#msg55362465). Popura wont work until they solve their internal issues.
+
 ## Table of Contents
 
 * [Install](#install)
